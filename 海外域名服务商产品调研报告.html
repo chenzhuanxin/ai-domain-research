@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>海外域名服务商产品调研（2026 年 10 月）</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2312564C'/%3E%3Ccircle cx='13' cy='13' r='5' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Cpath d='M10.5 22.5c1.4-2 3.1-3 5-3s3.6 1 5 3' fill='none' stroke='%23C4762A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+:root{
+  --ink:#1F2329;
+  --ink-2:#646A73;
+  --ink-3:#8A939B;
+  --line:#DEE3E8;
+  --line-2:#EDF1F4;
+  --primary:#12564C;
+  --primary-soft:#E8F0EE;
+  --accent:#C4762A;
+  --accent-soft:#FAEFE3;
+  --bg:#FFFFFF;
+  --bg-soft:#F7F9FA;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Microsoft YaHei",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.78;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+/* ===== 报头 ===== */
+.masthead{border-bottom:2px solid var(--ink);padding:56px 0 22px;margin-bottom:0;}
+.kicker{
+  font-size:13px;letter-spacing:.14em;color:var(--primary);
+  font-weight:700;margin:0 0 18px;text-transform:none;
+}
+h1.title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(28px,4.6vw,50px);line-height:1.22;letter-spacing:-.01em;
+  margin:0 0 16px;max-width:20em;
+}
+.subtitle{font-size:17px;color:var(--ink-2);margin:0 0 26px;max-width:44em;line-height:1.7;}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:10px 34px;font-size:13.5px;color:var(--ink-2);
+  border-top:1px solid var(--line);padding-top:14px;
+}
+.meta-row b{color:var(--ink);font-weight:700;}
+
+.strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-bottom:1px solid var(--line);margin-bottom:0;
+}
+.strip .cell{padding:22px 22px 22px 0;border-right:1px solid var(--line-2);}
+.strip .cell:last-child{border-right:0;}
+.strip .num{
+  font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.1vw,34px);
+  color:var(--primary);line-height:1.1;font-variant-numeric:tabular-nums;
+}
+.strip .lbl{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.55;}
+
+/* ===== 章节 ===== */
+section{padding:54px 0 8px;border-bottom:1px solid var(--line-2);}
+section:last-of-type{border-bottom:0;}
+h2.sec{
+  font-family:var(--serif);font-weight:700;font-size:clamp(21px,2.6vw,28px);
+  margin:0 0 8px;line-height:1.3;display:flex;gap:14px;align-items:baseline;
+}
+h2.sec .no{
+  font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;flex:none;padding-top:6px;
+}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:46em;margin:0 0 26px;line-height:1.8;}
+p{margin:0 0 16px;}
+h3{font-family:var(--serif);font-weight:600;font-size:18.5px;margin:30px 0 12px;}
+
+/* ===== 表格 ===== */
+.tablewrap{overflow-x:auto;margin:0 0 10px;border:1px solid var(--line);}
+table{border-collapse:collapse;width:100%;table-layout:fixed;min-width:1120px;}
+thead th{
+  background:var(--bg-soft);text-align:left;font-weight:700;font-size:13.5px;
+  color:var(--ink-2);padding:12px 14px;border-bottom:1px solid var(--line);
+  vertical-align:bottom;line-height:1.5;
+}
+tbody td{
+  padding:14px;border-bottom:1px solid var(--line-2);vertical-align:top;
+  font-size:14px;line-height:1.68;overflow-wrap:anywhere;
+}
+tbody tr:last-child td{border-bottom:0;}
+tbody tr:hover{background:#FCFDFD;}
+.pname{font-weight:700;font-size:14.5px;}
+.dev{display:block;color:var(--ink-3);font-size:12.5px;margin-top:3px;line-height:1.5;}
+.score{
+  font-family:var(--serif);font-weight:700;font-size:19px;color:var(--primary);
+  font-variant-numeric:tabular-nums;display:block;
+}
+.score.na{color:var(--ink-3);font-size:15px;}
+.basis{display:block;color:var(--ink-3);font-size:12px;margin-top:5px;line-height:1.55;}
+a{color:var(--primary);text-decoration:none;border-bottom:1px solid rgba(18,86,76,.35);}
+a:hover{border-bottom-color:var(--primary);}
+a.ext::after{content:"↗";font-size:.78em;vertical-align:.18em;margin-left:2px;color:var(--ink-3);}
+.note-inline{color:var(--ink-3);font-size:12.5px;}
+.tag{
+  display:inline-block;font-size:12px;font-weight:700;line-height:1.5;
+  padding:1px 8px;border:1px solid var(--line);color:var(--ink-2);
+  background:var(--bg-soft);margin-bottom:6px;margin-right:4px;
+}
+.tag.cat-video{color:#0E4A41;background:#E8F0EE;border-color:#C9DCD6;}
+.tag.cat-live{color:#7A4712;background:var(--accent-soft);border-color:#E7D2B8;}
+.tag.cat-clone{color:#1F4E79;background:#E8EFF5;border-color:#C9D8E6;}
+.tag.cat-interactive{color:#4C5636;background:#EFF1E6;border-color:#D5DAC4;}
+.tag.free{color:#fff;background:var(--primary);border-color:var(--primary);}
+.tag.paid{color:#7A4712;background:var(--accent-soft);border-color:#E7D2B8;}
+ul.tight{margin:0;padding-left:18px;}
+ul.tight li{margin-bottom:5px;}
+
+/* ===== 图表 ===== */
+.chart-card{border:1px solid var(--line);padding:22px 20px 12px;margin:0 0 10px;background:var(--bg);}
+.chart-title{font-family:var(--serif);font-weight:600;font-size:16.5px;margin:0 0 4px;}
+.chart-sub{font-size:13px;color:var(--ink-2);margin:0 0 14px;line-height:1.62;}
+.chart{width:100%;height:520px;}
+.chart.tall{height:640px;}
+.caption{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:6px 0 0;}
+
+/* ===== 结论块 ===== */
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+.findings .f{padding:24px 24px 8px 0;border-right:1px solid var(--line-2);}
+.findings .f:last-child{border-right:0;padding-right:0;}
+.findings .f .t{font-family:var(--serif);font-weight:700;font-size:16.5px;margin:0 0 8px;line-height:1.5;}
+.findings .f p{font-size:14px;color:var(--ink-2);line-height:1.72;margin:0;}
+
+/* ===== 时间线 ===== */
+.timeline{margin:6px 0 0;position:relative;}
+.timeline::before{
+  content:"";position:absolute;top:11px;bottom:11px;
+  left:116.5px;width:1px;background:var(--line);
+}
+.tnode{display:grid;grid-template-columns:104px 26px 1fr;align-items:start;}
+.tnode .when{
+  font-size:13px;font-weight:700;color:var(--primary);text-align:right;
+  padding-right:10px;line-height:22px;font-variant-numeric:tabular-nums;
+}
+.tnode .axis{display:flex;justify-content:center;}
+.tnode .dot{position:relative;z-index:1;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--primary);margin-top:6px;}
+.tnode.hot .dot{background:var(--accent);border-color:var(--accent);}
+.tnode .body{padding:0 0 22px 14px;}
+.tnode:last-child .body{padding-bottom:0;}
+.tnode .what{font-weight:700;font-size:15px;margin:0 0 3px;line-height:1.55;}
+.tnode .why{font-size:14px;color:var(--ink-2);margin:0;line-height:1.7;}
+
+/* ===== 待确认 ===== */
+.todo{border-top:1px solid var(--line);}
+.todo .t{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line-2);}
+.todo .t .n{font-family:var(--serif);font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;font-size:15px;}
+.todo .t .c{font-size:14px;line-height:1.72;color:var(--ink);}
+.todo .t .c b{font-weight:700;}
+
+/* ===== 信源索引 ===== */
+.srcgrp{margin-bottom:28px;}
+.srcgrp h3{margin-top:0;}
+.srclist{margin:0;padding:0;}
+.srcitem{display:grid;grid-template-columns:112px 1fr;gap:12px;margin-bottom:12px;list-style:none;}
+.srclabel{font-size:12.5px;color:var(--ink-3);font-weight:700;line-height:1.6;}
+.srcbody{font-size:14px;line-height:1.7;overflow-wrap:anywhere;}
+.srcfield{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-3);}
+
+footer{padding:34px 0 56px;color:var(--ink-3);font-size:13px;line-height:1.8;}
+footer b{color:var(--ink-2);}
+
+@media (max-width:960px){
+  .strip{grid-template-columns:repeat(2,1fr);}
+  .strip .cell:nth-child(2){border-right:0;}
+  .strip .cell{border-bottom:1px solid var(--line-2);padding-right:16px;}
+  .strip .cell:nth-child(3),.strip .cell:nth-child(4){border-bottom:0;}
+  .findings{grid-template-columns:1fr;}
+  .findings .f{border-right:0;border-bottom:1px solid var(--line-2);padding:20px 0 14px;}
+  .findings .f:last-child{border-bottom:0;}
+  .tablewrap{border:0;overflow:visible;}
+  table{min-width:0;table-layout:auto;display:block;}
+  thead{display:none;}
+  tbody{display:block;}
+  tbody tr{display:block;border:1px solid var(--line);margin-bottom:14px;padding:4px 0;}
+  tbody td{display:grid;grid-template-columns:88px 1fr;gap:10px;border-bottom:1px solid var(--line-2);padding:10px 14px;font-size:13.5px;}
+  tbody td:last-child{border-bottom:0;}
+  tbody td::before{
+    content:attr(data-label);font-size:12.5px;color:var(--ink-3);font-weight:700;line-height:1.6;
+  }
+  .chart{height:640px;}
+  .chart.tall{height:840px;}
+  .tnode{grid-template-columns:78px 20px 1fr;}
+  .tnode .when{font-size:12px;padding-right:7px;}
+  .tnode .body{padding-left:10px;}
+  .timeline::before{left:87.5px;}
+  .meta-row{font-size:14px;}
+  .strip .lbl{font-size:13.5px;}
+  .findings .f p{font-size:14.5px;}
+  tbody td{font-size:14.5px;grid-template-columns:98px 1fr;}
+  tbody td::before{font-size:13px;}
+  .dev{font-size:14px;}
+  .tablewrap a.ext{display:inline-block;padding:10px 0;}
+  .srcitem{grid-template-columns:1fr;gap:2px;}
+  .srclabel{font-size:13px;}
+  .srcbody{font-size:14.5px;}
+  .kicker{font-size:14px;}
+  .strip .lbl{font-size:14px;}
+  .tag{font-size:14px;}
+  h2.sec .no{font-size:14px;}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px;}
+  .chart{height:720px;}
+  .tnode{grid-template-columns:66px 16px 1fr;}
+  .timeline::before{left:73.5px;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">域名服务商调研 · 海外（非中国大陆）· 2026 年 10 月口径</p>
+    <h1 class="title">海外域名服务商产品调研</h1>
+    <p class="subtitle">覆盖云平台型、平价按成本型、老牌综合注册商与二级交易平台四类共 18 个在营服务商：谁在卖、免费用多少、首年与续费差多少、whois 隐私与转出限制怎么落地。国内服务商由另一份报告覆盖，此处仅在核验章节作为对照出现。所有数字与网址均附可追溯来源。</p>
+    <div class="meta-row">
+      <span>数据口径：<b>截至 2026-10-08</b></span>
+      <span>计价货币：<b>USD（约合人民币 1 USD≈7.1 CNY）</b></span>
+      <span>信源交叉：<b>官方站点 / 科技媒体 / 用户社区</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="strip">
+    <div class="cell"><div class="num">18</div><div class="lbl">可评分服务商（海外在营）</div></div>
+    <div class="cell"><div class="num">16</div><div class="lbl">含免费额度（免费隐私 / 免费挂牌）</div></div>
+    <div class="cell"><div class="num">$10–38</div><div class="lbl">.com 续费年费区间（≈¥74–272）</div></div>
+    <div class="cell"><div class="num">4</div><div class="lbl">覆盖服务商类型数</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section>
+  <h2 class="sec"><span class="no">01</span>核心结论</h2>
+  <p class="lede">海外域名市场已经分成互不重叠的四条线：以 Cloudflare 为代表的「按成本转售」（注册价＝续费价）、以 Porkbun / Spaceship / Dynadot / NameSilo 为代表的「平价扁平定价」、以 GoDaddy / Network Solutions / Gandi 为代表的「首年低价、续费翻倍」老牌注册商，以及只做成交抽佣的二级交易平台（Sedo / Afternic）。同一个 .com，续费价从约 $10.44 一路到 $38.38，差价接近四倍。</p>
+  <div class="findings">
+    <div class="f"><p class="t">续费价才是真实价格，首年价基本是营销</p><p>把 .com 放到同一把尺子上：Cloudflare 按注册局成本约 $10.44–10.46、Spaceship $9.98、Dynadot $10.88、Porkbun $11.08，而 GoDaddy 续费 $22.99、IONOS $20.00、Network Solutions $22.99、Gandi $38.38——首年促销却常低至 $0.99–5。判断标准很简单：把「首年价 ×1 + 续费价 ×N」算成多年持有成本，本报告因此在价格列同时给出注册与续费两个数。</p></div>
+    <div class="f"><p class="t">免费 whois 隐私已成平价注册商标配，老牌反而收钱</p><p>Cloudflare、Porkbun、Spaceship、Dynadot、NameSilo、Hover、Gandi 把域名隐私保护做成默认免费项，OVHcloud 更把隐私保护默认开启；而 Network Solutions、Name.com 仍把隐私作为付费附加（口径见待确认）。隐私收费与否，在长期持有下每年要多付 $8–15，比首年省下来的钱更值得计算。</p></div>
+    <div class="f"><p class="t">.ai / .io / .dev 是新价格风险集中区</p><p>第三方比价（2026-10-07）显示 .ai 注册价最低档即约 ¥461（Spaceship）、Porkbun ¥554，续费同档位；Dynadot 的 .io 从 $28.89 涨到续费 $53.50、.co 从 $15.50 到 $31.20、.xyz 从 $1.99 到 $14.45。ccTLD 与热门新后缀的注册局定价权不在注册商手里，选后缀前先看注册局规则与历史调价记录。</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">02</span>产品字段总表</h2>
+  <p class="lede">同一行回答同一组问题：谁运营、属于哪一类服务商、去哪买、免费用多少、注册与续费各是什么价（海外产品以 USD 原值报价并附约合人民币）、质量与短板在哪。评分为主观共识评分，非厂商指标。</p>
+  <div class="tablewrap">
+    <table>
+      <colgroup>
+        <col style="width:15%"><col style="width:7%"><col style="width:13%">
+        <col style="width:12%"><col style="width:17%"><col style="width:16%"><col style="width:20%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>服务商 / 运营方</th>
+          <th>评分</th>
+          <th>评分依据</th>
+          <th>官方入口</th>
+          <th>免费额度</th>
+          <th>价格</th>
+          <th>特点与局限</th>
+        </tr>
+      </thead>
+      <tbody id="mainTable">
+      </tbody>
+    </table>
+  </div>
+  <p class="caption" id="tableCaption"></p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">03</span>综合质量评分对比</h2>
+  <p class="lede">评分为主观共识评分，由作者综合价目透明度（是否公开续费价）、是否对续费加价、whois 隐私是否免费、控制台与 API 完整度、转出便利性及用户社区口碑给出，满分 10 分。四类服务商按自身核心维度加权，跨类型不宜直接横向比较。</p>
+  <div class="chart-card">
+    <p class="chart-title">18 个海外域名服务商的综合质量评分（满分 10）</p>
+    <p class="chart-sub">颜色区分服务商类型：深青为云平台型，赭色为老牌综合注册商，蓝为二级交易平台，橄榄为平价按成本型。</p>
+    <div class="chart tall" id="chartScore"></div>
+    <p class="caption">数据口径：2026-10-08。评分非厂商官方指标。</p>
+  </div>
+  <p>第一梯队是 Cloudflare Registrar（9.0）、Porkbun（8.8）、Namecheap（8.4）、Spaceship（8.3）与 Squarespace Domains（8.2）：共同点是「注册与续费价差小、隐私免费、价目可预期」。7.4–8.1 是「某一项明显占优、但存在结构性短板」的中间层（Dynadot 8.2、NameSilo 8.1、OVHcloud 8.0、GoDaddy 8.0、Hover 7.9、Sedo 7.8、IONOS 7.6、Name.com 7.5、Afternic 7.5、Netim 7.4、Hostinger 7.4）。末尾的 Gandi（7.2）与 Network Solutions（7.0）并非能力差，而是「续费溢价 + 隐私或服务另收费」拖累了长期成本。需要提示：交易平台（Sedo / Afternic）不提供注册与解析，其评分只反映交易与经纪能力，不可与注册商直接比较。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">04</span>价格与免费额度的位置</h2>
+  <p class="lede">把「最低付费门槛」和「质量评分」放在同一坐标系，看免费与付费档的分布规律。</p>
+  <div class="chart-card">
+    <p class="chart-title">.com 续费年费与质量评分的关系</p>
+    <p class="chart-sub">横轴为该服务商的 .com 续费年费（元/年，海外原价按 1 USD≈7.1 CNY 换算），纵轴为综合评分。此处刻意用「续费价」而非首年促销价，因为它才代表长期持有成本。</p>
+    <div class="chart" id="chartPrice"></div>
+    <p class="caption">虚线为 .com 注册局按成本基准线（注册局 $10.26 + ICANN $0.20 ≈ $10.46，约 ¥74）。仅纳入 .com 定价口径明确的服务商；Netim（价格待确认）、Sedo 与 Afternic（佣金制，无注册价）未纳入，原因见待确认清单。</p>
+  </div>
+  <p>把续费价与评分放在一起，规律比国内更清楚：横轴左侧（¥70–125）几乎被平价型与云平台型占满——Cloudflare ¥74、Spaceship ¥71、Dynadot ¥77、Porkbun ¥79、OVHcloud ¥104、Namecheap ¥106、NameSilo ¥123——而右侧（¥135–272）集中了 Hover、Gandi、GoDaddy、Network Solutions、Name.com 等老牌，其中 Gandi（¥272）与 Cloudflare（¥74）之间是 3.7 倍的差距。预算敏感的组合持有应当把「续费价 + 隐私是否免费」作为第一筛选条件，把品牌与客服作为第二筛选条件。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">05</span>2024—2026 关键节点</h2>
+  <p class="lede">按公开可查的并购、政策与调价时点排列，用于理解海外价格结构是怎么形成的。</p>
+  <div class="timeline" id="timeline"></div>
+  <p style="margin-top:22px;">两年之内发生了三件事：海外注册商格局收敛（Google Domains 并入 Squarespace，四强主导）；后缀供给即将再次扩容（ICANN 推进新一轮 new gTLD）；而定价权持续向注册局集中——注册局上调批发价，注册商要么按成本转嫁（Cloudflare、Dynadot、Spaceship 一类），要么把涨幅藏进续费价（GoDaddy、IONOS、Gandi 一类）。选注册商的本质，是选它站在哪一边。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">06</span>厂商 / 能力核验</h2>
+  <p class="lede">用户情报与检索中重点点名的服务商、易于误传的能力与需要排除的对象，逐一给出核验结论；没有该业务或无法核实就如实写。</p>
+  <div class="tablewrap">
+    <table>
+      <colgroup><col style="width:16%"><col style="width:16%"><col style="width:68%"></colgroup>
+      <thead>
+        <tr><th>厂商 / 产品</th><th>核验结论</th><th>说明</th></tr>
+      </thead>
+      <tbody id="verifyTable"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">07</span>信源索引</h2>
+  <p class="lede">按服务商分组，标注每条来源支撑哪些字段。三类信源交叉验证：官方站点与官方价格页、第三方比价与科技媒体、开发者与用户社区。</p>
+  <div id="sourceIndex"></div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">08</span>待确认与无法核实项</h2>
+  <p class="lede">以下条目在本轮公开检索范围内无法取得可靠官方口径，如实列出，未作推测填补。</p>
+  <div class="todo" id="todoList"></div>
+</section>
+
+<footer>
+  <p><b>方法与免责：</b>本报告信息采集截止北京时间 2026 年 10 月 8 日，全部价格以人民币计（海外产品引用美元原值并约合人民币，按 1 USD ≈ 7.1 CNY 估算，欧元档位先按 €1 ≈ $1.08 折美元再换算，均为量级参考）。“域名服务商质量评分”为主观共识评分，由作者综合价目透明度、是否对续费加价、whois 隐私是否免费、控制台与 API 完整度、转出便利性及用户社区口碑给出，非厂商官方指标，也不等同于客观基准测试；同一服务商在不同后缀、年限与批量下的报价差异较大。</p>
+  <p><b>已剔除的非官方来源：</b>第三方域名自称官方或提供更低报价的页面，均不作为官方依据；带推广性质的内容源已在引用时单独标注。部分海外注册商官网对无头抓取或境内网络返回 403/不可达（见自检记录），其价格以第三方比价与官方价格页交叉校对。</p>
+  <p>价格与免费额度变动频繁，正式采购前请以厂商官方页面为准。</p>
+</footer>
+
+<script>
+/* =====================================================================
+   填充说明（两个子代理按此规范填充，勿改动 CSS 与渲染函数结构）：
+   1. PRODUCTS：每个服务商一个对象；cat 取值 cloud/legacy/market/flat；
+      score 为 10 分制主观共识分；avail 取值 free/paid；
+      site 为官方域名（label 显示名，url 链接）；
+      free 写免费额度具体口径；price 写价格（USD 原值并附 cny 约合人民币）；
+      basis 写 10-25 字评分依据（首句为「共识区间 X–Y」）；note 写特点与局限（40-90 字）。
+   2. PRICE_POINTS：x=最低付费年费（元，海外按 1 USD≈7.1 换算），y=评分。
+   3. TIMELINE：{when, what, why, hot}。
+   4. VERIFIED：{name, verdict, note}。
+   5. SOURCES：按服务商分组，items 为 [来源类型, 链接HTML, 支撑字段]。
+   6. TODOS：[服务商, 待确认说明]。
+===================================================================== */
+
+const PRODUCTS = [
+  {
+    name:"Cloudflare Registrar", dev:"Cloudflare, Inc.｜美国旧金山（2019 年上线注册业务）", cat:"cloud",
+    score:9.0, avail:"free",
+    site:{label:"cloudflare.com/products/registrar", url:"https://www.cloudflare.com/products/registrar/"},
+    free:"免费 whois 隐私（注册信息自动编辑 / 隐藏）；免费 DNS、DNSSEC、SSL 与 CDN（域名须接入 Cloudflare）",
+    price:".com 按成本价约 $10.44–10.46/年（注册局 $10.26 + ICANN $0.20），注册价＝续费价、不设加价；其余后缀同样按「注册局批发价 + ICANN 费」零加价转售",
+    cny:".com ≈¥74/年（按 1 USD≈7.1）",
+    basis:"共识区间 8.8–9.4；按成本零加价、免费隐私最透明",
+    note:"把注册局价原价转售，没有首年促销也没有续费跳涨，免费 whois 隐私与 DNS/SSL 一并给足；局限是必须把域名解析托管在 Cloudflare，不提供中文客服与境内发票，注册局调价会即时传导。"
+  },
+  {
+    name:"Squarespace Domains", dev:"Squarespace, Inc.｜美国纽约（2023 年承接 Google Domains 业务）", cat:"cloud",
+    score:8.2, avail:"free",
+    site:{label:"squarespace.com/domains", url:"https://www.squarespace.com/domains"},
+    free:"免费 whois 隐私（延续 Google Domains 政策）；免费 SSL 与基础 DNS；首年促销常见低于 $12",
+    price:".com 首年约 $12、续费 $20.00/年；.org 续费 $20.00；.net 续费 $20.00（第三方 2026 年对比口径）",
+    cny:".com ≈¥85 首年 / ≈¥142 续费",
+    basis:"共识区间 7.8–8.6；无续费跳涨，承接 Google 客户",
+    note:"Google Domains 客户与其域名资产已整体迁移至此，域名与建站、邮箱打包，续费价稳定；局限是域名管理功能偏简单、批量与 API 能力弱，境内访问与支付体验一般。"
+  },
+  {
+    name:"IONOS（1&1）", dev:"IONOS SE（原 1&1）｜德国蒙塔鲍尔", cat:"cloud",
+    score:7.6, avail:"free",
+    site:{label:"ionos.com/domains", url:"https://www.ionos.com/domains"},
+    free:"个人账户免费 whois 隐私；首年促销常低至 $1；含免费 SSL 与邮箱试用",
+    price:".com 首年促销约 $1、续费 $20.00/年；.co 续费 $48.00/年（第三方 2026 年对比口径）",
+    cny:".com ≈¥7 首年 / ≈¥142 续费",
+    basis:"共识区间 7.1–8.1；首年极低、续费约为首年 20 倍",
+    note:"欧洲最大主机商之一，域名与主机、邮箱打包，首年 $1 促销极具吸引力；局限是续费价约为首年的 20 倍，账户注销与转移流程繁琐，隐私保护对组织类客户的口径有变化（见待确认）。"
+  },
+  {
+    name:"Hostinger", dev:"Hostinger International Ltd.｜立陶宛（域名经合作注册商提供）", cat:"cloud",
+    score:7.4, avail:"free",
+    site:{label:"hostinger.com/domain-name-search", url:"https://www.hostinger.com/domain-name-search"},
+    free:"购买主机套餐赠首年域名；免费 whois 隐私（部分后缀不支持，如 .ai 等 ccTLD）；免费 SSL",
+    price:".com 续费 $19.99/年；低价主要来自多年预付与主机捆绑（第三方 2026 年对比口径）",
+    cny:".com ≈¥142/年续费",
+    basis:"共识区间 6.9–7.9；捆绑便宜、单独买域名不划算",
+    note:"以主机套餐赠送域名获客，适合连建站一起买；局限是单买域名价格无优势、域名管理深度与 API 能力弱，转移常需联系客服，部分后缀无隐私保护。"
+  },
+  {
+    name:"OVHcloud Domains", dev:"OVH SAS｜法国鲁贝（欧洲云厂商直营注册业务）", cat:"cloud",
+    score:8.0, avail:"free",
+    site:{label:"ovhcloud.com/en/domains/", url:"https://www.ovhcloud.com/en/domains/"},
+    free:"whois 隐私保护默认开启（官方口径）；免费 DNS 与 DNSSEC；无免费域名额度",
+    price:"官网抓取口径：.com 注册 $9.20 / 续费 $14.69 / 转入 $9.20；.io 续费 $62.69（促销 $35.82）；.dev 续费 $17.19（促销 $9.84）；.ai 注册 $77.39 / 续费 $130.79；.cn 注册 $53.40 / 续费 $14.60",
+    cny:".com ≈¥65 注册 / ≈¥104 续费；.ai ≈¥549 注册 / ≈¥929 续费",
+    basis:"共识区间 7.6–8.4；后缀多、API 强、隐私默认开启",
+    note:"欧洲云厂商直营，注册与续费价分列公开、隐私默认开启、支持 API 与 DNSSEC，适合技术团队规模化持有；局限是界面偏工程师、中文支持弱，赎回与宽限期规则执行严格。"
+  },
+  {
+    name:"Porkbun", dev:"Porkbun LLC｜美国俄勒冈州波特兰（2014 年成立）", cat:"flat",
+    score:8.8, avail:"free",
+    site:{label:"porkbun.com", url:"https://porkbun.com/"},
+    free:"免费 whois 隐私（极少数后缀除外）；免费 SSL、URL 转发与 20 个邮箱转发；无首年陷阱",
+    price:".com $11.08/年（注册＝续费同价）；.org 续费约 $11.64（第三方对比口径，以后缀价页为准）",
+    cny:".com ≈¥79/年",
+    basis:"共识区间 8.4–9.2；价目扁平、免费隐私、无加价",
+    note:"以「注册价＝续费价」著称的平价注册商，免费隐私与转发齐全、DNS 由 Cloudflare 驱动，第三方口碑长期领先；局限是界面无中文、不提供境内发票与备案支持，客服以工单为主。"
+  },
+  {
+    name:"NameSilo", dev:"NameSilo, LLC｜美国亚利桑那州凤凰城（2009 年成立）", cat:"flat",
+    score:8.1, avail:"free",
+    site:{label:"namesilo.com", url:"https://www.namesilo.com/"},
+    free:"免费 whois 隐私（长期免费）；免费邮箱转发与 DNS 管理；批量工具不限量",
+    price:".com 续费 $17.29/年；.net 续费 $15.95；.org 续费 $14.99；.co 续费 $38.99（第三方 2026 年对比口径）",
+    cny:".com ≈¥123/年",
+    basis:"共识区间 7.7–8.5；隐私免费、批量与 API 好用",
+    note:"美系平价注册商，注册与续费价长期一致、批量管理与 API 完整，适合几十上百个域名的组合持有；局限是单价高于按成本的 Cloudflare 与 Porkbun，界面朴素、无中文支持。"
+  },
+  {
+    name:"Spaceship", dev:"Namecheap 旗下新品牌｜美国洛杉矶", cat:"flat",
+    score:8.3, avail:"free",
+    site:{label:"spaceship.com", url:"https://www.spaceship.com/"},
+    free:"免费 whois 隐私（多数后缀）；免费 DNS 与 SSL；首年促销力度大、注册与续费同价",
+    price:".com $9.98/年、转入 $9.48；官方对比页同时公布主要注册商的 .com 续费价（GoDaddy $22.99、IONOS $20.00、Gandi $38.38 等）",
+    cny:".com ≈¥71/年",
+    basis:"共识区间 7.9–8.7；Namecheap 姊妹品牌、价格激进",
+    note:"Namecheap 推出的新品牌，主打「注册价＝续费价」与更低单价，界面现代、迁移工具顺手；局限是品牌较新、后缀库与 API 成熟度不及母公司，公开评测与社区样本较少。"
+  },
+  {
+    name:"Dynadot", dev:"Dynadot LLC｜美国加州（2002 年成立，ICANN 认证注册商）", cat:"flat",
+    score:8.2, avail:"free",
+    site:{label:"dynadot.com/domain/pricing", url:"https://www.dynadot.com/domain/pricing"},
+    free:"免费域名隐私保护（默认启用，官方口径）；免费 DNS 与建站工具；批量与 API 工具强",
+    price:"官网价格页口径：.com $10.88/年（注册＝续费）；.ai $85.60；.net $12.52；.org $7.99 → 续费 $11.64；.dev $12.00 → 续费 $12.50；.io $28.89 → 续费 $53.50；.co $15.50 → 续费 $31.20",
+    cny:".com ≈¥77/年；.ai ≈¥608；.io ≈¥205 注册 / ≈¥380 续费",
+    basis:"共识区间 7.8–8.6；扁平定价、隐私默认开、API 强",
+    note:"二十余年历史的认证注册商，注册与续费同价、隐私保护默认启用，批量与 API 适合组合管理；局限是 .io 等后缀续费涨幅大（$28.89→$53.50），界面信息密度高、上手需适应。"
+  },
+  {
+    name:"GoDaddy", dev:"GoDaddy Inc.｜美国亚利桑那州（1997 年成立，全球最大注册商）", cat:"legacy",
+    score:8.0, avail:"free",
+    site:{label:"godaddy.com", url:"https://www.godaddy.com/"},
+    free:"基础 whois 隐私（个人账户，2022 年起免费；另有信源称收费，见待确认）；首年促销常见 $1 级；免费 DNS 基础版",
+    price:".com 首年促销约 $0.01–5、续费 $22.99/年；.org 续费 $23.99；.net 续费 $24.99；.co 续费 $59.99（第三方 2026 年对比口径）",
+    cny:".com ≈¥163/年续费",
+    basis:"共识区间 7.5–8.5；规模与品牌最大、续费最贵",
+    note:"全球最大注册商，电话客服、交易（一口价 / 停放到 Afternic 体系）与转售资源最全，适合企业采购；局限是续费价约为按成本的两倍，结账附加推销多，隐私分级与账单条款复杂。"
+  },
+  {
+    name:"Namecheap", dev:"Namecheap, Inc.｜美国洛杉矶（2000 年成立）", cat:"legacy",
+    score:8.4, avail:"free",
+    site:{label:"namecheap.com", url:"https://www.namecheap.com/domains/"},
+    free:"免费 WhoisGuard 隐私（终身免费）；免费 DNS 与 SSL；转入长期优惠",
+    price:".com 首年促销 $0.99–11.28、标准价 $14.98/年、续费约 $13.98–18.48（不同信源口径不一）；支持 1000+ 后缀",
+    cny:".com ≈¥106/年（续费 ≈¥99–131 区间）",
+    basis:"共识区间 8.0–8.8；免费隐私＋价格稳定、口碑稳",
+    note:"知名平价老牌，WhoisGuard 隐私终身免费、支持上千个后缀，文档与社区丰富，是个人与中小企业最常被推荐的起点；局限是结账环节附加推销较多，高级 DNS 与部分后缀并无价格优势。"
+  },
+  {
+    name:"Network Solutions", dev:"Network Solutions（Newfold Digital 体系）｜美国弗吉尼亚州", cat:"legacy",
+    score:7.0, avail:"paid",
+    site:{label:"networksolutions.com", url:"https://www.networksolutions.com/domain-name-registration"},
+    free:"无长期免费额度；whois 隐私为付费附加",
+    price:".com 续费 $22.99/年；.org 续费 $29.99；.net 续费 $24.99；.co 续费 $56.99（第三方 2026 年对比口径）",
+    cny:".com ≈¥163/年续费",
+    basis:"共识区间 6.5–7.5；老牌但续费高、隐私另收费",
+    note:"最早的商业注册商之一，企业客户与合规形象仍在，适合已有账户的存量用户；局限是续费价高、隐私保护需另付费，界面与自动化明显落后于新一代注册商。"
+  },
+  {
+    name:"Hover", dev:"Hover（Tucows 旗下）｜加拿大多伦多 / 美国", cat:"legacy",
+    score:7.9, avail:"free",
+    site:{label:"hover.com", url:"https://www.hover.com/"},
+    free:"免费 whois 隐私（Contact Privacy 服务）；无附加推销；免费 DNS 与邮箱转发",
+    price:".com $18.99/年（注册＝续费同价）；.org 续费 $17.99；.net 续费 $19.99（第三方 2026 年对比口径）",
+    cny:".com ≈¥135/年",
+    basis:"共识区间 7.4–8.4；价格扁平、体验干净、零推销",
+    note:"Tucows 旗下，主打「无推销、注册与续费同价、隐私免费」，界面克制，适合只想安静持有域名的人；局限是单价高于平价注册商、后缀与生态较少，不适合拼低价批量持有。"
+  },
+  {
+    name:"Gandi", dev:"Gandi SAS｜法国巴黎（2023 年被 Total Webhosting Solutions 收购）", cat:"legacy",
+    score:7.2, avail:"free",
+    site:{label:"gandi.net/en/domain", url:"https://www.gandi.net/en/domain"},
+    free:"免费 whois 隐私（多数后缀）；免费 DNS 与 SSL；开发者文档完善",
+    price:".com 首年约 $24、续费 $38.38/年；.org 续费 $39.98；.net 续费 $39.98；.co 续费 $71.98（第三方 2026 年对比口径）",
+    cny:".com ≈¥170 首年 / ≈¥272 续费",
+    basis:"共识区间 6.7–7.7；品牌与合规好、收购后涨价明显",
+    note:"法国老牌注册商，支持 700+ 后缀、隐私免费、文档与 API 完善，欧洲合规场景仍有吸引力；局限是 2023 年被 Total Webhosting Solutions 收购后价格大幅上调、原本附赠的邮箱转为付费，性价比明显下降。"
+  },
+  {
+    name:"Name.com", dev:"Name.com（Identity Digital 体系）｜美国丹佛（2003 年成立）", cat:"legacy",
+    score:7.5, avail:"paid",
+    site:{label:"name.com", url:"https://www.name.com/"},
+    free:"whois 隐私为付费附加（口径待确认）；免费 DNS 与基础管理工具",
+    price:".com 首年约 $13、续费 $19.99/年；.org 续费 $19.99；.net 续费 $23.99（第三方 2026 年对比口径）",
+    cny:".com ≈¥92 首年 / ≈¥142 续费",
+    basis:"共识区间 7.0–8.0；品牌与体验好、隐私不免费",
+    note:"老牌注册商，域名管理体验友好、企业服务与批量工具齐全，适合品牌方；局限是隐私保护需额外付费、续费价高于平价注册商，无中文支持与境内发票。"
+  },
+  {
+    name:"Netim", dev:"Netim SAS｜法国（ICANN 认证注册商，专注 ccTLD 与 API）", cat:"legacy",
+    score:7.4, avail:"free",
+    site:{label:"netim.com", url:"https://www.netim.com/"},
+    free:"免费 whois 隐私（多数后缀）；免费 DNS 与邮件转发",
+    price:"待确认（官网按后缀分页公示，本轮未取得统一的美元/人民币档位）",
+    cny:"待确认",
+    basis:"共识区间 6.9–7.9；ccTLD 覆盖广、API 完整",
+    note:"法国注册商，以国别后缀（.fr、.eu 等）与自动化 API 见长，隐私免费、适合跨地区批量持有；局限是面向终端用户的中文资料少、单价偏中上，公开比价与评测样本有限。"
+  },
+  {
+    name:"Sedo", dev:"Sedo GmbH｜德国科隆（全球主要域名二级市场之一）", cat:"market",
+    score:7.8, avail:"free",
+    site:{label:"sedo.com", url:"https://sedo.com/"},
+    free:"挂牌与估价免费；成交按佣金计费",
+    price:"不适用（交易佣金制，费率以官网为准）",
+    cny:"不适用",
+    basis:"共识区间 7.4–8.3；全球最大二级市场之一",
+    note:"老牌域名交易与停放平台，一口价、竞价、经纪与估值服务齐备，是买入心仪已注册域名的主要渠道之一；局限是按成交抽佣（费率待确认），本身不提供注册、解析与 whois 托管服务。"
+  },
+  {
+    name:"Afternic", dev:"Afternic（GoDaddy 体系）｜美国", cat:"market",
+    score:7.5, avail:"free",
+    site:{label:"afternic.com", url:"https://www.afternic.com/"},
+    free:"挂牌免费；成交按佣金计费",
+    price:"不适用（交易佣金制，费率以官网为准）",
+    cny:"不适用",
+    basis:"共识区间 7.0–8.0；分销网络广、买家流量大",
+    note:"与 GoDaddy 交易体系协同的域名交易平台，挂牌后可经分销网络在多家注册商处成交，买家流量大、成交路径短；局限是佣金结构与「快速转移」条款复杂（费率与归属待确认），卖家需自行判断定价。"
+  }
+];
+
+const PRICE_POINTS = [
+  {name:'Spaceship', x:71, y:8.3, free:true, lp:'bottom'},
+  {name:'Cloudflare', x:74, y:9.0, free:true, lp:'top'},
+  {name:'Dynadot', x:77, y:8.2, free:true, lp:'bottom'},
+  {name:'Porkbun', x:79, y:8.8, free:true, lp:'top'},
+  {name:'OVHcloud', x:104, y:8.0, free:true, lp:'bottom'},
+  {name:'Namecheap', x:106, y:8.4, free:true, lp:'right'},
+  {name:'NameSilo', x:123, y:8.1, free:true, lp:'bottom'},
+  {name:'Hover', x:135, y:7.9, free:true, lp:'right'},
+  {name:'Squarespace', x:142, y:8.2, free:true, lp:'right'},
+  {name:'IONOS', x:142, y:7.6, free:true, lp:'bottom'},
+  {name:'Hostinger', x:142, y:7.4, free:true, lp:'bottom'},
+  {name:'Name.com', x:142, y:7.5, free:false, lp:'top'},
+  {name:'GoDaddy', x:163, y:8.0, free:true, lp:'right'},
+  {name:'Network Solutions', x:163, y:7.0, free:false, lp:'bottom'},
+  {name:'Gandi', x:272, y:7.2, free:true, lp:'left'}
+];
+
+const TIMELINE = [
+  {when:'2024.07', what:'Google Domains 客户迁移至 Squarespace 完成', why:'谷歌 2023 年宣布将域名业务出售给 Squarespace，2024 年 7 月完成客户与域名资产迁移，domains.google 不再提供独立注册服务；海外注册市场由此收敛为 GoDaddy、Namecheap、Cloudflare 与 Squarespace 主导的格局。', hot:true},
+  {when:'2026.01', what:'ICANN 推进新一轮通用顶级域（new gTLD）计划', why:'ICANN 已批准启动新一轮新 gTLD 相关工作，后缀供给将再次扩容。历史经验是：新后缀首发多为促销价，2–3 年后随注册局成本上调转向高续费，.studio、.gold 在 2026 年的单边调价就是例子。', hot:false},
+  {when:'2026.05', what:'.ai 成为价格最贵的「AI 标配」后缀', why:'AI 热潮推高 .ai（安圭拉国家顶级域）需求，第三方比价（2026-10-07）显示注册价最低档为 Spaceship 约 ¥461.48、Namecheap 约 ¥502.84、Porkbun 约 ¥554.47，续费同档位；Dynadot 报价 $85.60 并同样不区分注册与续费。', hot:true},
+  {when:'2026.08', what:'注册局成本上行向全球传导', why:'上游注册局调价直接抬升各注册商的进价：腾讯云 2026-08-25 公告对 .site、.online、.xyz、.info、.tv 等 70 余个国际后缀同步调价（.online 续费 ¥91→¥122、.xyz 续费 ¥88→¥106 等），并明确「转入价与续费价一致」。', hot:true},
+  {when:'2026.09', what:'阿里云公告 .studio / .gold 调价', why:'阿里云自 2026-10-07 零时起把 .studio 调至 ¥328/年、.gold 调至 ¥698/年，理由是上游注册局成本上调。这两个后缀的涨幅说明：新后缀的价格风险不在首年，而在三年后的续费。', hot:false},
+  {when:'2026.10', what:'海外 .com 续费价差拉大至约 3.7 倍', why:'按同一时间点的公开报价折算：Cloudflare 按成本约 ¥74、Spaceship ¥71、Porkbun ¥79，而 GoDaddy 与 Network Solutions 约 ¥163、Gandi 约 ¥272（第三方对比与官方价格页，2026-10）。同是 .com，长期持有成本差别主要来自注册商是否「按成本转售」。', hot:true}
+];
+
+const VERIFIED = [
+  {name:'Google Domains', verdict:'<span class="tag">已停服，并入 Squarespace</span>', note:'谷歌 2023 年宣布把域名注册业务出售给 Squarespace，客户与域名资产于 2024 年 7 月迁移完成，domains.google 不再作为独立注册商运营；需要 Google 域名历史价格与政策的用户，现应查 Squarespace Domains。信源：<a class="ext" href="https://domains.google/">domains.google</a>、<a class="ext" href="https://www.squarespace.com/domains">Squarespace Domains</a>。'},
+  {name:'Freenom（.tk / .ml / .ga / .cf / .gq）', verdict:'<span class="tag">已停服</span>', note:'曾以免费 .tk 等后缀知名的 Freenom 长期停止新注册与解析，官网仅保留公告页，实际无法正常注册与续费，列入排除清单；若域名仍在 Freenom 名下，需依注册局与 ICANN 机制尽快转移。信源：<a class="ext" href="https://www.freenom.com/">Freenom 官网公告页</a>。'},
+  {name:'「Cloudflare Registrar 只能转入、不能新注册」的说法', verdict:'<span class="tag">能力已澄清</span>', note:'Cloudflare 早期确实仅支持从其他注册商转入，但现已支持新注册（官方产品页同时提供 register 与 transfer 两条路径）。真正需要留意的是它的前置条件：必须把域名的 DNS 托管在 Cloudflare，且按成本零加价也意味着没有议价空间。信源：<a class="ext" href="https://www.cloudflare.com/products/registrar/">Cloudflare Registrar 产品页</a>、<a class="ext" href="https://developers.cloudflare.com/registrar/">Cloudflare Registrar 开发者文档</a>。'},
+  {name:'Sedo / Afternic', verdict:'<span class="tag">非注册商（交易平台）</span>', note:'两者是域名二级市场与经纪平台，不提供注册、解析与 whois 托管资质，也不公布注册价，其收益来自成交佣金与增值服务；把它们与注册商放在同一价格轴上比较是口径错误，本报告在价格图中已剔除。信源：<a class="ext" href="https://sedo.com/">Sedo 官网</a>、<a class="ext" href="https://www.afternic.com/">Afternic 官网</a>。'},
+  {name:'Verisign', verdict:'<span class="tag">非此类产品</span>', note:'Verisign 是 .com / .net 的注册局（registry），只向 ICANN 认证注册商批发，不直接零售域名；其官方批发价目表是判断「某家续费是否偏高」的基准（.com 注册局费与 ICANN 费合计约 $10.46）。信源：<a class="ext" href="https://www.verisign.com/en_US/channel-resources/registry-operations/price-list/index.xhtml">Verisign 注册局价格表</a>。'},
+  {name:'ICANN / IANA', verdict:'<span class="tag">非注册商，核验与救济渠道</span>', note:'ICANN 维护认证注册商名录并对已终止授权的注册商安排域名批量转移，是遇注册商失联时的官方救济路径；IANA 根区数据库用于核验后缀真实性与所属注册局（如 .ai、.io、.dev）。信源：<a class="ext" href="https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars">ICANN 认证注册商名录</a>、<a class="ext" href="https://www.iana.org/domains/root/db">IANA Root Zone Database</a>。'},
+  {name:'以「域名到期 / 续费」为名的第三方通知与仿冒页面', verdict:'<span class="tag">仿冒站，排除</span>', note:'海外长期存在 domain slamming 与假借「亚洲域名注册机构」「中文域名保护」名义施压续费的骗局，境内也由中央网信办举报中心持续治理仿冒假冒网站。核验方法：只认注册商官网域名与 ICANN 认证名录，收到到期通知一律回注册商后台自查。信源：<a class="ext" href="https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars">ICANN 认证注册商名录</a>、<a class="ext" href="https://www.cac.gov.cn/">中央网信办</a>。'}
+];
+
+const SOURCES = [
+  {p:"Cloudflare Registrar", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.cloudflare.com/products/registrar/\">Cloudflare Registrar 产品页</a>","按成本定价、注册与转移路径、免费 whois 隐私"],
+    ["官方文档","<a class=\"ext\" href=\"https://developers.cloudflare.com/registrar/\">Cloudflare Registrar 开发者文档</a>","前置条件（须使用 Cloudflare DNS）、支持后缀与操作流程"],
+    ["注册局价目表","<a class=\"ext\" href=\"https://www.verisign.com/en_US/channel-resources/registry-operations/price-list/index.xhtml\">Verisign：.com / .net 批发价</a>","按成本价构成（注册局 $10.26 + ICANN $0.20）"]
+  ]},
+  {p:"Squarespace Domains", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.squarespace.com/domains\">Squarespace Domains</a>","产品定位、承接 Google Domains 客户、隐私与 SSL"],
+    ["前身站点","<a class=\"ext\" href=\"https://domains.google/\">domains.google（已停服入口）</a>","Google Domains 停服状态核验"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格对照（.com 首年与续费口径）"]
+  ]},
+  {p:"IONOS", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.ionos.com/domains\">IONOS Domains</a>","官方入口、产品与隐私政策"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $20.00、首年 $1 促销陷阱对照"]
+  ]},
+  {p:"Hostinger", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.hostinger.com/domain-name-search\">Hostinger 域名搜索</a>","官方入口、捆绑赠域名与隐私支持范围"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $19.99"]
+  ]},
+  {p:"OVHcloud Domains", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.ovhcloud.com/en/domains/\">OVHcloud Domains</a>","官方入口、whois 隐私默认开启、API 与 DNSSEC"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","后缀价格对照与汇率换算口径"]
+  ]},
+  {p:"Porkbun", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://porkbun.com/\">Porkbun 官网</a>","官方入口、注册与续费同价、免费 whois 隐私与转发"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","价格对照（.com 约 $11 档）"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>",".ai / .io / .dev 报价与人民币换算"]
+  ]},
+  {p:"NameSilo", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.namesilo.com/\">NameSilo 官网</a>","官方入口、免费隐私与批量工具"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $17.29 与 .net/.org/.co 对照"]
+  ]},
+  {p:"Spaceship", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官网</a>","官方入口、注册与续费同价、迁移工具"],
+    ["官方对比页","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship：主流注册商 .com 续费价对比</a>","GoDaddy / Squarespace / Hover / IONOS / Name.com / Network Solutions / NameSilo / Hostinger / Gandi 的续费价"]
+  ]},
+  {p:"Dynadot", items:[
+    ["官方价格页","<a class=\"ext\" href=\"https://www.dynadot.com/domain/pricing\">Dynadot 域名价格页</a>","价格（.com $10.88、.ai $85.60、.io $28.89→$53.50、.dev、.org、.co 等）"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","横向对照与人民币换算"]
+  ]},
+  {p:"GoDaddy", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.godaddy.com/\">GoDaddy 官网</a>","官方入口、whois 隐私政策与产品线"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $22.99、.org/.net/.co 对照"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","首年促销价与续费差价对照"]
+  ]},
+  {p:"Namecheap", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.namecheap.com/domains/\">Namecheap 域名页</a>","官方入口、WhoisGuard 免费隐私、后缀数量"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>",".ai 报价与首年/续费口径"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页</a>","姊妹品牌价格对照"]
+  ]},
+  {p:"Network Solutions", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.networksolutions.com/domain-name-registration\">Network Solutions 域名注册页</a>","官方入口、隐私为付费附加"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $22.99、.org $29.99 对照"]
+  ]},
+  {p:"Hover", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.hover.com/\">Hover 官网</a>","官方入口、无推销与免费隐私政策、注册与续费同价"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $18.99 对照"]
+  ]},
+  {p:"Gandi", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.gandi.net/en/domain\">Gandi Domains</a>","官方入口、后缀覆盖、免费隐私与 DNS"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $38.38、.org/.net/.co 对照"]
+  ]},
+  {p:"Name.com", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.name.com/\">Name.com 官网</a>","官方入口、产品与管理工具"],
+    ["第三方对比","<a class=\"ext\" href=\"https://www.spaceship.com/\">Spaceship 官方注册商对比页（.com 续费价）</a>","续费价 $19.99 与隐私付费口径"]
+  ]},
+  {p:"Netim", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.netim.com/\">Netim 官网</a>","官方入口、ccTLD 覆盖与 API、免费隐私"],
+    ["核验工具","<a class=\"ext\" href=\"https://www.iana.org/domains/root/db\">IANA Root Zone Database</a>","ccTLD 归属与后缀真实性核验"]
+  ]},
+  {p:"Sedo / Afternic", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://sedo.com/\">Sedo 官网</a>","交易、经纪与停放服务范围（无注册资质）"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.afternic.com/\">Afternic 官网</a>","分销网络与交易流程"]
+  ]},
+  {p:"通用核验与规则来源", items:[
+    ["注册局","<a class=\"ext\" href=\"https://www.verisign.com/en_US/channel-resources/registry-operations/price-list/index.xhtml\">Verisign 注册局价格表（.com / .net 批发价）</a>","续费溢价的判断基准"],
+    ["管理机构","<a class=\"ext\" href=\"https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars\">ICANN 认证注册商名录</a>","资质核验与已终止授权注册商的批量转移机制"],
+    ["核验工具","<a class=\"ext\" href=\"https://www.iana.org/domains/root/db\">IANA Root Zone Database</a>","后缀真实性与所属注册局"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","主流后缀注册 / 续费 / 转入价与人民币换算"]
+  ]}
+];
+
+const TODOS = [
+  ["Netim 价格","官网按后缀分页公示，本轮未取得统一的美元档位，无法纳入价格图与横向比价，待官方价格页确认。"],
+  ["OVHcloud / Dynadot 逐后缀价格","表中价格来自本轮官网价格页抓取快照（.com / .ai / .io / .dev 等），采购前需以下单页复核；注册局调价可能导致逐项变动。"],
+  ["GoDaddy whois 隐私是否免费","官方口径为个人账户基础隐私免费（2022 年起），但第三方对比中有「WHOIS 隐私需额外付费」的说法，两种口径并存，待官方页面确认。"],
+  ["Name.com 隐私保护收费口径","第三方资料记为付费附加，未取得官方页面原文，待确认。"],
+  ["IONOS 隐私保护对组织客户的口径","个人账户免费，但组织/企业类联系信息是否公开在 2026 年有政策调整说法，未取得官方原文，待确认。"],
+  ["Cloudflare 后续调价与注册局上调","注册局批发价存在周期性上调（.com 注册局费与 ICANN 费合计约 $10.46 为当前基准），若注册局再次上调，按成本价将同步变动，具体幅度与生效日期待注册局公告确认。"],
+  ["Sedo / Afternic 佣金费率","两者均为成交抽佣制，具体费率与「快速转移」条款依交易类型与价格区间而定，未取得可引用的官方费率原文，待确认。"],
+  ["Namecheap 续费价区间","不同信源给出的 .com 续费价在 $13.98–18.48 之间，官网价目页未取得逐字原文，待确认。"],
+  ["Porkbun 被收购传闻","第三方内容提及 Porkbun 于 2024 年被收购，未取得可引用的官方或权威媒体原文，本报告不作结论，待确认。"],
+  ["Hostinger 域名注册主体","域名能力经合作注册商提供，具体注册商主体与 whois 归属未在官网明确标注，转移与争议处理路径待确认。"],
+  ["Squarespace Domains 的 Google 历史政策延续范围","隐私与 SSL 免费等政策是否完全延续 Google Domains 时期口径，未取得官方政策原文，待确认。"],
+  ["海外注册商官网可访问性","GoDaddy、Afternic 等站点在本机网络下不可达（DNS/TLS 层面），Namecheap、NameSilo、Sedo、Netim、Spaceship、Network Solutions 返回 403，价格以第三方比价与官方价格页交叉校对，未逐字复核的字段已在表内标注。"]
+];
+
+/* ================= 渲染：总表 ================= */
+const CAT = {cloud:'云平台型', legacy:'老牌综合注册商', market:'二级交易平台', flat:'平价按成本型'};
+const CAT_TAG = {cloud:'cat-video', legacy:'cat-live', market:'cat-clone', flat:'cat-interactive'};
+const tableEl = document.getElementById('mainTable');
+PRODUCTS.forEach(function(p){
+  const availTag = p.avail === 'free'
+    ? '<span class="tag free">有免费额度</span>'
+    : '<span class="tag paid">无公开免费额度</span>';
+  const catTag = '<span class="tag ' + CAT_TAG[p.cat] + '">' + CAT[p.cat] + '</span>';
+  const scoreHtml = (p.score === null)
+    ? '<span class="score na">—</span>'
+    : '<span class="score">' + p.score.toFixed(1) + '</span>';
+  const priceHtml = p.price + (p.cny ? '<span class="note-inline" style="display:block;margin-top:3px">' + p.cny + '</span>' : '');
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td data-label="服务商 / 运营方"><span class="pname">' + p.name + '</span><span class="dev">' + p.dev + '</span><span style="display:block;margin-top:6px">' + catTag + availTag + '</span></td>' +
+    '<td data-label="评分">' + scoreHtml + '</td>' +
+    '<td data-label="评分依据"><span class="basis">' + p.basis + '</span></td>' +
+    '<td data-label="官方入口"><a class="ext" href="' + p.site.url + '">' + p.site.label + '</a></td>' +
+    '<td data-label="免费额度">' + p.free + '</td>' +
+    '<td data-label="价格">' + priceHtml + '</td>' +
+    '<td data-label="特点与局限">' + p.note + '</td>';
+  tableEl.appendChild(tr);
+});
+document.getElementById('tableCaption').textContent =
+  '注：评分为主观共识评分（满分 10），非厂商官方指标。价格与免费额度均以 2026-10-08 公开信息为准；人民币约合按 1 USD≈7.1 估算。标注「待确认」表示本轮未取得可靠官方口径。价格列格式为「注册 / 续费」。';
+
+/* ================= 渲染：时间线 ================= */
+const tlEl = document.getElementById('timeline');
+TIMELINE.forEach(function(t){
+  var d = document.createElement('div');
+  d.className = 'tnode' + (t.hot ? ' hot' : '');
+  d.innerHTML = '<div class="when">' + t.when + '</div><div class="axis"><i class="dot"></i></div>' +
+                '<div class="body"><p class="what">' + t.what + '</p><p class="why">' + t.why + '</p></div>';
+  tlEl.appendChild(d);
+});
+
+/* ================= 渲染：核验表 ================= */
+const vEl = document.getElementById('verifyTable');
+VERIFIED.forEach(function(v){
+  var tr = document.createElement('tr');
+  tr.innerHTML = '<td data-label="厂商 / 产品"><span class="pname">' + v.name + '</span></td>' +
+                 '<td data-label="核验结论">' + v.verdict + '</td>' +
+                 '<td data-label="说明">' + v.note + '</td>';
+  vEl.appendChild(tr);
+});
+
+/* ================= 渲染：信源索引 ================= */
+const srcEl = document.getElementById('sourceIndex');
+SOURCES.forEach(function(g){
+  var h = document.createElement('div');
+  h.className = 'srcgrp';
+  var rows = g.items.map(function(it){
+    var link = /^https?:/.test(it[1]) ? '<a class="ext" href="' + it[1] + '">' + it[1] + '</a>' : it[1];
+    link = link.replace(/・/g, '<br>');
+    return '<li class="srcitem">' +
+           '<span class="srclabel">' + it[0] + '</span>' +
+           '<span class="srcbody">' + link +
+           '<span class="srcfield">支撑字段：' + it[2] + '</span></span></li>';
+  }).join('');
+  h.innerHTML = '<h3>' + g.p + '</h3><ul class="srclist">' + rows + '</ul>';
+  srcEl.appendChild(h);
+});
+
+/* ================= 渲染：待确认 ================= */
+const todoEl = document.getElementById('todoList');
+TODOS.forEach(function(t, i){
+  var d = document.createElement('div');
+  d.className = 't';
+  d.innerHTML = '<div class="n">' + (i + 1) + '</div><div class="c"><b>' + t[0] + '：</b>' + t[1] + '</div>';
+  todoEl.appendChild(d);
+});
+
+/* ================= ECharts ================= */
+var C = {primary:'#12564C', accent:'#C4762A', ink:'#1F2329', ink2:'#646A73', ink3:'#8A939B', line:'#DEE3E8'};
+var CAT_COLOR = {cloud:'#12564C', legacy:'#C4762A', market:'#4E7BA6', flat:'#7C8A5A'};
+var FONT = '"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif';
+
+function renderScore(){
+  var el = document.getElementById('chartScore');
+  if(!el || typeof echarts === 'undefined') return;
+  var data = PRODUCTS.filter(function(p){return p.score !== null;})
+                     .slice().sort(function(a,b){return a.score - b.score;});
+  var chart = echarts.init(el);
+  chart.setOption({
+    grid:{left:8, right:72, top:18, bottom:34, containLabel:true},
+    tooltip:{
+      trigger:'axis', axisPointer:{type:'shadow'},
+      backgroundColor:'#fff', borderColor:C.line, borderWidth:1,
+      textStyle:{color:C.ink, fontFamily:FONT, fontSize:14},
+      formatter:function(ps){
+        var i = ps[0].dataIndex, p = data[i];
+        return '<b>' + p.name + '</b><br/>综合评分：' + p.score.toFixed(1) + ' / 10<br/>类型：' + CAT[p.cat] +
+               '<br/>运营方：' + p.dev + '<br/>评分依据：' + p.basis;
+      }
+    },
+    xAxis:{
+      type:'value', min:0, max:10, splitNumber:5,
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13}
+    },
+    yAxis:{
+      type:'category',
+      data:data.map(function(p){return p.name;}),
+      axisLine:{show:false}, axisTick:{show:false},
+      axisLabel:{color:C.ink, fontFamily:FONT, fontSize:13.5}
+    },
+    series:[{
+      type:'bar', barWidth:'58%',
+      data:data.map(function(p){
+        return {
+          value:p.score,
+          itemStyle:{color:CAT_COLOR[p.cat], borderRadius:[0,3,3,0]}
+        };
+      }),
+      label:{
+        show:true, position:'right', fontFamily:FONT, fontSize:13.5,
+        fontWeight:'bold', color:C.ink, formatter:function(ps){return ps.value.toFixed(1);}
+      }
+    }]
+  });
+  window.addEventListener('resize', function(){chart.resize();});
+}
+
+function renderPrice(){
+  var el = document.getElementById('chartPrice');
+  if(!el || typeof echarts === 'undefined' || !PRICE_POINTS.length) return;
+  var chart = echarts.init(el);
+  chart.setOption({
+    grid:{left:8, right:40, top:26, bottom:56, containLabel:true},
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'#fff', borderColor:C.line, borderWidth:1,
+      textStyle:{color:C.ink, fontFamily:FONT, fontSize:14},
+      formatter:function(ps){
+        var d = ps.data, v = d.value;
+        return '<b>' + d.name + '</b><br/>.com 续费年费：¥' + v[0] + '/年' +
+               '<br/>综合评分：' + v[1].toFixed(1);
+      }
+    },
+    xAxis:{
+      type:'value', min:50, max:300,
+      axisLine:{lineStyle:{color:C.line}}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13, formatter:'{value}'},
+      name:'.com 续费年费（元）', nameLocation:'middle', nameGap:34,
+      nameTextStyle:{color:C.ink2, fontFamily:FONT, fontSize:13}
+    },
+    yAxis:{
+      type:'value', min:6.6, max:9.4, splitNumber:5,
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13},
+      name:'综合评分', nameTextStyle:{color:C.ink2, fontFamily:FONT, fontSize:13}
+    },
+    series:[{
+      type:'scatter',
+      symbolSize:16,
+      data:PRICE_POINTS.map(function(p){
+        return {
+          name:p.name,
+          value:[p.x, p.y],
+          free:p.free,
+          label:{position:p.lp, distance:10}
+        };
+      }),
+      itemStyle:{
+        color:function(ps){return ps.data.free ? C.primary : C.accent;},
+        borderColor:'#fff', borderWidth:1.5
+      },
+      label:{
+        show:true, fontFamily:FONT, fontSize:12.5, color:C.ink,
+        formatter:function(ps){return ps.data.name;}
+      },
+      markLine:{
+        silent:true, symbol:'none',
+        lineStyle:{color:C.primary, type:'dashed', width:1, opacity:.55},
+        label:{show:true, position:'insideEndTop', fontFamily:FONT, fontSize:12, color:C.primary,
+               formatter:'按成本基准线（≈¥74）'},
+        data:[{xAxis:74}]
+      }
+    }]
+  });
+  window.addEventListener('resize', function(){chart.resize();});
+}
+
+renderScore();
+renderPrice();
+</script>
+
+</main>
+
+</body>
+</html>
