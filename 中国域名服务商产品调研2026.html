@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中国域名服务商产品调研（2026 年 10 月）</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2312564C'/%3E%3Ccircle cx='13' cy='13' r='5' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Cpath d='M10.5 22.5c1.4-2 3.1-3 5-3s3.6 1 5 3' fill='none' stroke='%23C4762A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+<style>
+:root{
+  --ink:#1F2329;
+  --ink-2:#646A73;
+  --ink-3:#8A939B;
+  --line:#DEE3E8;
+  --line-2:#EDF1F4;
+  --primary:#12564C;
+  --primary-soft:#E8F0EE;
+  --accent:#C4762A;
+  --accent-soft:#FAEFE3;
+  --bg:#FFFFFF;
+  --bg-soft:#F7F9FA;
+  --serif:"Noto Serif SC","Songti SC",Georgia,"Microsoft YaHei",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--sans);font-weight:400;font-size:16px;line-height:1.78;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+/* ===== 报头 ===== */
+.masthead{border-bottom:2px solid var(--ink);padding:56px 0 22px;margin-bottom:0;}
+.kicker{
+  font-size:13px;letter-spacing:.14em;color:var(--primary);
+  font-weight:700;margin:0 0 18px;text-transform:none;
+}
+h1.title{
+  font-family:var(--serif);font-weight:900;
+  font-size:clamp(28px,4.6vw,50px);line-height:1.22;letter-spacing:-.01em;
+  margin:0 0 16px;max-width:20em;
+}
+.subtitle{font-size:17px;color:var(--ink-2);margin:0 0 26px;max-width:44em;line-height:1.7;}
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:10px 34px;font-size:13.5px;color:var(--ink-2);
+  border-top:1px solid var(--line);padding-top:14px;
+}
+.meta-row b{color:var(--ink);font-weight:700;}
+
+.strip{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-bottom:1px solid var(--line);margin-bottom:0;
+}
+.strip .cell{padding:22px 22px 22px 0;border-right:1px solid var(--line-2);}
+.strip .cell:last-child{border-right:0;}
+.strip .num{
+  font-family:var(--serif);font-weight:700;font-size:clamp(22px,3.1vw,34px);
+  color:var(--primary);line-height:1.1;font-variant-numeric:tabular-nums;
+}
+.strip .lbl{font-size:13px;color:var(--ink-2);margin-top:7px;line-height:1.55;}
+
+/* ===== 章节 ===== */
+section{padding:54px 0 8px;border-bottom:1px solid var(--line-2);}
+section:last-of-type{border-bottom:0;}
+h2.sec{
+  font-family:var(--serif);font-weight:700;font-size:clamp(21px,2.6vw,28px);
+  margin:0 0 8px;line-height:1.3;display:flex;gap:14px;align-items:baseline;
+}
+h2.sec .no{
+  font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;flex:none;padding-top:6px;
+}
+.lede{font-size:16.5px;color:var(--ink-2);max-width:46em;margin:0 0 26px;line-height:1.8;}
+p{margin:0 0 16px;}
+h3{font-family:var(--serif);font-weight:600;font-size:18.5px;margin:30px 0 12px;}
+
+/* ===== 表格 ===== */
+.tablewrap{overflow-x:auto;margin:0 0 10px;border:1px solid var(--line);}
+table{border-collapse:collapse;width:100%;table-layout:fixed;min-width:1120px;}
+thead th{
+  background:var(--bg-soft);text-align:left;font-weight:700;font-size:13.5px;
+  color:var(--ink-2);padding:12px 14px;border-bottom:1px solid var(--line);
+  vertical-align:bottom;line-height:1.5;
+}
+tbody td{
+  padding:14px;border-bottom:1px solid var(--line-2);vertical-align:top;
+  font-size:14px;line-height:1.68;overflow-wrap:anywhere;
+}
+tbody tr:last-child td{border-bottom:0;}
+tbody tr:hover{background:#FCFDFD;}
+.pname{font-weight:700;font-size:14.5px;}
+.dev{display:block;color:var(--ink-3);font-size:12.5px;margin-top:3px;line-height:1.5;}
+.score{
+  font-family:var(--serif);font-weight:700;font-size:19px;color:var(--primary);
+  font-variant-numeric:tabular-nums;display:block;
+}
+.score.na{color:var(--ink-3);font-size:15px;}
+.basis{display:block;color:var(--ink-3);font-size:12px;margin-top:5px;line-height:1.55;}
+a{color:var(--primary);text-decoration:none;border-bottom:1px solid rgba(18,86,76,.35);}
+a:hover{border-bottom-color:var(--primary);}
+a.ext::after{content:"↗";font-size:.78em;vertical-align:.18em;margin-left:2px;color:var(--ink-3);}
+.note-inline{color:var(--ink-3);font-size:12.5px;}
+.tag{
+  display:inline-block;font-size:12px;font-weight:700;line-height:1.5;
+  padding:1px 8px;border:1px solid var(--line);color:var(--ink-2);
+  background:var(--bg-soft);margin-bottom:6px;margin-right:4px;
+}
+.tag.cat-video{color:#0E4A41;background:#E8F0EE;border-color:#C9DCD6;}
+.tag.cat-live{color:#7A4712;background:var(--accent-soft);border-color:#E7D2B8;}
+.tag.cat-clone{color:#1F4E79;background:#E8EFF5;border-color:#C9D8E6;}
+.tag.cat-interactive{color:#4C5636;background:#EFF1E6;border-color:#D5DAC4;}
+.tag.free{color:#fff;background:var(--primary);border-color:var(--primary);}
+.tag.paid{color:#7A4712;background:var(--accent-soft);border-color:#E7D2B8;}
+ul.tight{margin:0;padding-left:18px;}
+ul.tight li{margin-bottom:5px;}
+
+/* ===== 图表 ===== */
+.chart-card{border:1px solid var(--line);padding:22px 20px 12px;margin:0 0 10px;background:var(--bg);}
+.chart-title{font-family:var(--serif);font-weight:600;font-size:16.5px;margin:0 0 4px;}
+.chart-sub{font-size:13px;color:var(--ink-2);margin:0 0 14px;line-height:1.62;}
+.chart{width:100%;height:520px;}
+.chart.tall{height:640px;}
+.caption{font-size:12.5px;color:var(--ink-3);line-height:1.7;margin:6px 0 0;}
+
+/* ===== 结论块 ===== */
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);}
+.findings .f{padding:24px 24px 8px 0;border-right:1px solid var(--line-2);}
+.findings .f:last-child{border-right:0;padding-right:0;}
+.findings .f .t{font-family:var(--serif);font-weight:700;font-size:16.5px;margin:0 0 8px;line-height:1.5;}
+.findings .f p{font-size:14px;color:var(--ink-2);line-height:1.72;margin:0;}
+
+/* ===== 时间线 ===== */
+.timeline{margin:6px 0 0;position:relative;}
+.timeline::before{
+  content:"";position:absolute;top:11px;bottom:11px;
+  left:116.5px;width:1px;background:var(--line);
+}
+.tnode{display:grid;grid-template-columns:104px 26px 1fr;align-items:start;}
+.tnode .when{
+  font-size:13px;font-weight:700;color:var(--primary);text-align:right;
+  padding-right:10px;line-height:22px;font-variant-numeric:tabular-nums;
+}
+.tnode .axis{display:flex;justify-content:center;}
+.tnode .dot{position:relative;z-index:1;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--primary);margin-top:6px;}
+.tnode.hot .dot{background:var(--accent);border-color:var(--accent);}
+.tnode .body{padding:0 0 22px 14px;}
+.tnode:last-child .body{padding-bottom:0;}
+.tnode .what{font-weight:700;font-size:15px;margin:0 0 3px;line-height:1.55;}
+.tnode .why{font-size:14px;color:var(--ink-2);margin:0;line-height:1.7;}
+
+/* ===== 待确认 ===== */
+.todo{border-top:1px solid var(--line);}
+.todo .t{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line-2);}
+.todo .t .n{font-family:var(--serif);font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums;font-size:15px;}
+.todo .t .c{font-size:14px;line-height:1.72;color:var(--ink);}
+.todo .t .c b{font-weight:700;}
+
+/* ===== 信源索引 ===== */
+.srcgrp{margin-bottom:28px;}
+.srcgrp h3{margin-top:0;}
+.srclist{margin:0;padding:0;}
+.srcitem{display:grid;grid-template-columns:112px 1fr;gap:12px;margin-bottom:12px;list-style:none;}
+.srclabel{font-size:12.5px;color:var(--ink-3);font-weight:700;line-height:1.6;}
+.srcbody{font-size:14px;line-height:1.7;overflow-wrap:anywhere;}
+.srcfield{display:block;margin-top:2px;font-size:12.5px;color:var(--ink-3);}
+
+footer{padding:34px 0 56px;color:var(--ink-3);font-size:13px;line-height:1.8;}
+footer b{color:var(--ink-2);}
+
+@media (max-width:960px){
+  .strip{grid-template-columns:repeat(2,1fr);}
+  .strip .cell:nth-child(2){border-right:0;}
+  .strip .cell{border-bottom:1px solid var(--line-2);padding-right:16px;}
+  .strip .cell:nth-child(3),.strip .cell:nth-child(4){border-bottom:0;}
+  .findings{grid-template-columns:1fr;}
+  .findings .f{border-right:0;border-bottom:1px solid var(--line-2);padding:20px 0 14px;}
+  .findings .f:last-child{border-bottom:0;}
+  .tablewrap{border:0;overflow:visible;}
+  table{min-width:0;table-layout:auto;display:block;}
+  thead{display:none;}
+  tbody{display:block;}
+  tbody tr{display:block;border:1px solid var(--line);margin-bottom:14px;padding:4px 0;}
+  tbody td{display:grid;grid-template-columns:88px 1fr;gap:10px;border-bottom:1px solid var(--line-2);padding:10px 14px;font-size:13.5px;}
+  tbody td:last-child{border-bottom:0;}
+  tbody td::before{
+    content:attr(data-label);font-size:12.5px;color:var(--ink-3);font-weight:700;line-height:1.6;
+  }
+  .chart{height:640px;}
+  .chart.tall{height:840px;}
+  .tnode{grid-template-columns:78px 20px 1fr;}
+  .tnode .when{font-size:12px;padding-right:7px;}
+  .tnode .body{padding-left:10px;}
+  .timeline::before{left:87.5px;}
+  .meta-row{font-size:14px;}
+  .strip .lbl{font-size:13.5px;}
+  .findings .f p{font-size:14.5px;}
+  tbody td{font-size:14.5px;grid-template-columns:98px 1fr;}
+  tbody td::before{font-size:13px;}
+  .dev{font-size:14px;}
+  .tablewrap a.ext{display:inline-block;padding:10px 0;}
+  .srcitem{grid-template-columns:1fr;gap:2px;}
+  .srclabel{font-size:13px;}
+  .srcbody{font-size:14.5px;}
+  .kicker{font-size:14px;}
+  .strip .lbl{font-size:14px;}
+  .tag{font-size:14px;}
+  h2.sec .no{font-size:14px;}
+}
+@media (max-width:520px){
+  .wrap{padding:0 16px;}
+  .chart{height:720px;}
+  .tnode{grid-template-columns:66px 16px 1fr;}
+  .timeline::before{left:73.5px;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="kicker">域名服务商调研 · 中国（大陆）· 2026 年 10 月口径</p>
+    <h1 class="title">中国域名服务商产品调研</h1>
+    <p class="subtitle">覆盖云厂商、老牌注册商、域名交易平台与平价批量型四类：谁在卖、免费用多少、首年与续费各是什么价、whois 隐私与转出限制怎么落地。17 个在营服务商逐一核验，价格取自官方价目表与 2026-10-07 第三方比价，每条结论附可追溯来源。</p>
+    <div class="meta-row">
+      <span>数据口径：<b>截至 2026-10-08</b></span>
+      <span>计价货币：<b>人民币（CNY）</b></span>
+      <span>信源交叉：<b>官方站点 / 科技媒体 / 用户社区</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="strip">
+    <div class="cell"><div class="num">17</div><div class="lbl">可评分在营服务商</div></div>
+    <div class="cell"><div class="num">11</div><div class="lbl">含免费额度或免费隐私 / 解析</div></div>
+    <div class="cell"><div class="num">¥10–95</div><div class="lbl">主流后缀首年 / 续费年费区间</div></div>
+    <div class="cell"><div class="num">4</div><div class="lbl">覆盖服务商类型数</div></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section>
+  <h2 class="sec"><span class="no">01</span>核心结论</h2>
+  <p class="lede">国内域名市场在 2026 年呈现出清晰的三层结构：云厂商用生态与自动化吸走增量，老牌注册商用低价与批量守住存量，域名交易平台则把注册、抢注、竞价与转出做成了一条独立链路。真正需要警惕的不是「哪家贵」，而是首年促销价与续费价之间的落差——它几乎是行业默认的利润来源。</p>
+  <div class="findings">
+    <div class="f"><p class="t">价格陷阱集中在「首年低、续费高」</p><p>本轮核验的 17 家服务商里，首年价与续费价分离是普遍做法：三五互联 .cn 首年 ¥35、续费 ¥85（首页活动更打到首年 ¥9），腾讯云 .cn ¥33 首年、¥39 起续费，西部数码 .cc ¥28 新注、¥68 续费、.tech ¥14 新注、¥240 续费。真正的报价应看「多年持有成本」而不是首年数字，本报告因此在价格列同时给出新注与续费口径。</p></div>
+    <div class="f"><p class="t">免费额度已从「送主机」转向「送隐私与解析」</p><p>17 家中 11 家提供可用的免费权益：阿里云万网与新客 0 元注册、腾讯云首单 .com 0 元、美橙互联新用户 0 元注册、三五互联「完成备案即享 .CN 首年 0 元」，而华夏名网、爱名网把免费域名注册信息保护与解析作为标配，易名、聚名则把转入转出做成免费。免费额度是否包含隐私保护，往往比送一年域名更影响长期成本。</p></div>
+    <div class="f"><p class="t">交易与注册正在合流，但服务对象分野明显</p><p>易名中国、聚名网、爱名网三家把注册、抢注、一口价与批量转出串成一条链路，价格表以「首年促销」为主，面向域名投资者；阿里云万网同时经营一口价、抢注与回购，面向企业品牌方；老牌注册商（新网、中资源、西部数码）的价目表则同时公布新注、续费、转入与赎回价，透明度反而更高。选择哪一层，取决于你是要建站、要投资，还是要批量持有。</p></div>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">02</span>产品字段总表</h2>
+  <p class="lede">同一行回答同一组问题：谁在卖、属于哪一类服务商、去哪买、免费用多少、首年与续费各是什么价、质量与短板在哪。评分为主观共识评分，非厂商指标；价格口径为 2026-10-08 采集的人民币官方价目表与第三方比价，具体以订单结算价为准。</p>
+  <div class="tablewrap">
+    <table>
+      <colgroup>
+        <col style="width:15%"><col style="width:7%"><col style="width:13%">
+        <col style="width:12%"><col style="width:17%"><col style="width:16%"><col style="width:20%">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>服务商 / 运营方</th>
+          <th>评分</th>
+          <th>评分依据</th>
+          <th>官方入口</th>
+          <th>免费额度</th>
+          <th>价格</th>
+          <th>特点与局限</th>
+        </tr>
+      </thead>
+      <tbody id="mainTable">
+      </tbody>
+    </table>
+  </div>
+  <p class="caption" id="tableCaption"></p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">03</span>综合质量评分对比</h2>
+  <p class="lede">评分为主观共识评分，由作者综合官方价目透明度、后缀覆盖、控制台与 API 完整度、whois 隐私与转出便利性、用户社区口碑给出，满分 10 分。四类服务商（云厂商 / 老牌注册商 / 域名交易平台 / 平价批量型）按自身核心维度加权，跨类型不宜直接横向比较。</p>
+  <div class="chart-card">
+    <p class="chart-title">（17）个对象的综合质量评分（满分 10）</p>
+    <p class="chart-sub">颜色区分服务商类型：深青为云厂商，赭色为老牌注册商，蓝为域名交易平台，橄榄为平价与批量型。</p>
+    <div class="chart tall" id="chartScore"></div>
+    <p class="caption">数据口径：2026-10-08。评分非厂商官方指标。</p>
+  </div>
+  <p>第一梯队集中在 8.3 分以上：阿里云万网（9.0）、腾讯云 DNSPod（8.9）、西部数码（8.4）、华为云（8.3）。评分差异并不主要来自「后缀够不够多」——头部普遍覆盖上百个后缀——而是来自三件事：价目是否逐项公开（新注、续费、转入、赎回）、控制台与 API 是否可用、whois 隐私与转出是否顺畅。需要说明的是四类服务商不可直接比较：交易平台的强项是抢注与竞价，平价批量型的强项是多年成本，云厂商的强项是生态与自动化，本图只按各自核心维度加权后的综合分排序。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">04</span>价格与免费额度的位置</h2>
+  <p class="lede">把「最低付费门槛」和「质量评分」放在同一坐标系，看免费与低价档的分布规律。</p>
+  <div class="chart-card">
+    <p class="chart-title">最低付费年费与质量评分的关系</p>
+    <p class="chart-sub">横轴为可查证的最低付费年费（元/年，取该服务商主流后缀中最便宜的首年价），有 0 元首年活动的记为 0；纵轴为综合评分。仅纳入价格口径明确的在营服务商。</p>
+    <div class="chart" id="chartPrice"></div>
+    <p class="caption">未纳入本图的条目及其原因见总表与待确认清单。</p>
+  </div>
+  <p>把最低付费门槛与评分放在一起，可以看到国内域名市场并没有形成「越便宜越差」的关系：¥10–30 区间聚集了从 7.2 到 9.0 分的大量服务商，云厂商（阿里云万网、腾讯云）与平价型（西部数码、三五互联）在入门价上几乎贴身，差距体现在续费期与生态能力上。免费额度同样分化明显：有的是「一次性新客福利」（美橙互联新客 0 元、腾讯云首单 0 元），有的是「可持续的免费配套」（华夏名网的注册信息保护、易名与聚名的免费转入转出）。价格口径待确认的服务商（华为云、纳网科技）未纳入本图。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">05</span>2024—2026 关键节点</h2>
+  <p class="lede">按公开可查的调整、停服与政策时点排列，用于理解当前价格结构与规则是怎么形成的。</p>
+  <div class="timeline" id="timeline"></div>
+  <p style="margin-top:22px;">三年线索很清楚：2024 年海外先完成了格局收敛（Google Domains 并入 Squarespace），2026 年国内则进入「上游成本传导 + 平台促销对冲」的循环——腾讯云与阿里云先后公告调价，万网同期又用直降季把 .com 拉到 ¥76 起；与此同时，备案状态、认证明细与转出资料被写进流程，域名从「一个商品」变成「一串合规手续」。</p>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">06</span>厂商 / 能力核验</h2>
+  <p class="lede">用户情报与检索中重点点名的机构、易混淆主体与需要排除的对象，逐一给出核验结论；没有该业务或无法核实就如实写。</p>
+  <div class="tablewrap">
+    <table>
+      <colgroup><col style="width:16%"><col style="width:16%"><col style="width:68%"></colgroup>
+      <thead>
+        <tr><th>厂商 / 产品</th><th>核验结论</th><th>说明</th></tr>
+      </thead>
+      <tbody id="verifyTable"></tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">07</span>信源索引</h2>
+  <p class="lede">按服务商分组，标注每条来源支撑哪些字段。三类信源交叉验证：官方站点与官方价目表、第三方比价与科技媒体、用户社区。</p>
+  <div id="sourceIndex"></div>
+</section>
+
+<section>
+  <h2 class="sec"><span class="no">08</span>待确认与无法核实项</h2>
+  <p class="lede">以下条目在本轮公开检索范围内无法取得可靠官方口径，如实列出，未作推测填补。</p>
+  <div class="todo" id="todoList"></div>
+</section>
+
+<footer>
+  <p><b>方法与免责：</b>本报告信息采集截止北京时间 2026 年 10 月 8 日，全部价格以人民币计（海外产品引用美元原值并约合人民币，按 1 USD ≈ 7.1 CNY 估算）。“域名服务商质量评分”为主观共识评分，由作者综合官方价目透明度、后缀覆盖、控制台与 API 完整度、whois 隐私与转出便利性及用户社区口碑给出，非厂商官方指标，也不等同于客观基准测试；同一服务商在不同后缀、不同年限与是否批量下的报价差异较大。</p>
+  <p><b>已剔除的非官方来源：</b>第三方域名自称官方或提供更低报价的页面，均不作为官方依据；带推广性质的内容源已在引用时单独标注。域名价格受注册局批发价与促销活动影响频繁变动，正式采购前请以注册商官方页面与订单结算价为准。</p>
+  <p>价格与免费额度变动频繁，正式采购前请以厂商官方页面为准。</p>
+</footer>
+
+<script>
+/* =====================================================================
+   填充说明（两个子代理按此规范填充，勿改动 CSS 与渲染函数结构）：
+   1. PRODUCTS：每个服务商一个对象；cat 取值 cloud/legacy/market/flat；
+      score 为 10 分制主观共识分（可小数，null 表示不评分条目）；
+      avail 取值 free（有免费额度）/ paid（无公开免费额度）；
+      site 为官方域名（label 显示名，url 链接）；
+      free 写免费额度具体口径；price 写价格（国内人民币；海外 USD 并附 cny 约合人民币）；
+      basis 写 10-25 字评分依据（首句为「共识区间 X–Y」）；note 写特点与局限（40-90 字）。
+   2. PRICE_POINTS：x=最低付费年费（元），y=评分，free=true/false，lp=标签位置。
+   3. TIMELINE：{when, what, why, hot}，hot=true 表示关键节点（赭色圆点）。
+   4. VERIFIED：{name, verdict, note}，verdict 可含 <span class="tag">…</span>。
+   5. SOURCES：按服务商分组，items 为 [来源类型, 链接HTML(或纯文本), 支撑字段]。
+   6. TODOS：[服务商, 待确认说明]。
+   7. 除数据数组外，还需替换：报头 kicker/h1/subtitle/meta-row、strip 四个数字、
+      各 section 的 lede 与解读段落、（01）核心结论三卡、（05）时间线总结。
+===================================================================== */
+
+const PRODUCTS = [
+  {
+    name:"阿里云万网 域名注册", dev:"阿里云（Alibaba Cloud，万网品牌）", cat:"cloud",
+    score:9.0, avail:"free",
+    site:{label:"wanwang.aliyun.com", url:"https://wanwang.aliyun.com/"},
+    free:"新客活动域名低至 0 元；注册赠 AI 邮箱 / 建站权益；购买万小智 AI 建站或云·企业官网每单赠 1 个 .CN 域名首年免费（活动至 2026-12-31）",
+    price:".com 首年 ¥35–76（直降季 2026-10-01 至 10-31，.com ¥76 起）、.net ¥85 起、.top ¥12 起、.cc ¥26 起、.icu ¥10 起；.cn 约 ¥29–42/年；转入 ¥85/首年；批量与续费价以结算页为准",
+    basis:"共识区间 8.6–9.3；保有量国内第二，后缀与交易生态最全",
+    note:"域名＋解析＋备案＋建站＋邮箱一站式，控制台与 OpenAPI 完整，一口价 / 抢注 / 回购自成体系；短板是首年促销与续费落差大，注册信息披露要走工单（whoisrequest@service.aliyun.com）。"
+  },
+  {
+    name:"腾讯云 DNSPod 域名注册", dev:"腾讯云（Tencent Cloud / DNSPod）", cat:"cloud",
+    score:8.9, avail:"free",
+    site:{label:"cloud.tencent.com/product/domain", url:"https://cloud.tencent.com/product/domain"},
+    free:"首单 .com 0 元（2 年起售、限购 1 个）；.cn 首年 ¥33；免费 DNSPod 基础云解析；域名隐私保护口径以注册局与公告为准",
+    price:".com ¥83/首年、第 2 年起 ¥90/年；.cn ¥33/首年、¥39/年；.top ¥14/¥48；.icu ¥10 起；.xyz ¥15 起；.co 注册 ¥76、续费 ¥261（2026-08-25 调价后）",
+    basis:"共识区间 8.5–9.1；官价表公开到 10 年、调价有公告",
+    note:"域名与解析、证书、CDN 打通，价格表逐后缀公开到 10 年且调价必发公告，适合开发者与中小团队；短板是热门后缀 2 年起售、限购，部分后缀续费涨幅明显。"
+  },
+  {
+    name:"华为云 域名注册", dev:"华为云（Huawei Cloud）", cat:"cloud",
+    score:8.3, avail:"paid",
+    site:{label:"huaweicloud.com/product/domain.html", url:"https://www.huaweicloud.com/product/domain.html"},
+    free:"免费基础云解析；实名认证信息模板免费；无公开的域名免费注册额度",
+    price:"待确认（官网未公示统一后缀价目表，以购买页结算价为准）",
+    basis:"共识区间 7.8–8.6；政企合规与云生态协同好、比价信息少",
+    note:"域名与 DNS、CDN、企业邮箱、备案一体化，政企与出海合规适配好，云内资源编排顺手；短板是域名价格页不直观、促销少，个人用户比价成本高。"
+  },
+  {
+    name:"百度智能云 域名服务", dev:"百度智能云（Baidu AI Cloud）", cat:"cloud",
+    score:7.9, avail:"paid",
+    site:{label:"cloud.baidu.com", url:"https://cloud.baidu.com/"},
+    free:"待确认（官网未公示统一免费额度）",
+    price:".cn 注册约 ¥28（第三方比价口径，2026-10-07）；.ren ¥45 注册 / ¥48 续费；.store 续费约 ¥130；其余后缀待确认",
+    basis:"共识区间 7.4–8.4；云生态内比价便宜、价目公示不完整",
+    note:"依托百度智能云提供域名注册与解析，与云主机、备案串联，适合已在百度云内的用户；短板是域名价目表公示不完整，交易与抢注能力弱于阿里云。"
+  },
+  {
+    name:"新网 Xinnet", dev:"新网数码（Xinnet）", cat:"legacy",
+    score:8.2, avail:"free",
+    site:{label:"xinnet.com", url:"https://www.xinnet.com/"},
+    free:"域名安全锁（注册商级）免费；免费基础解析；whois 个人信息按注册局与 ICANN 政策隐藏",
+    price:".cn 注册 ¥29、转入 ¥29；.top ¥31；.cloud ¥12；.store ¥12（2026-10-07 比价口径）；.com 与续费价待确认",
+    basis:"共识区间 7.7–8.5；老牌 gTLD 保有量前列、渠道体系大",
+    note:"国内最早一批注册商，资质与渠道分销体系成熟，域名安全锁与自检服务有特色；短板是控制台体验偏老、价格公示不如云厂商透明，续费价差需逐项核对。"
+  },
+  {
+    name:"西部数码", dev:"成都西维数码科技有限公司", cat:"flat",
+    score:8.4, avail:"free",
+    site:{label:"west.cn", url:"https://www.west.cn/"},
+    free:"免费基础 DNS 解析；转入、过户免费（官方口径）；无长期免费注册额度，双 11 等节点有特价",
+    price:".com 新注 ¥79、续费 ¥89、转入 ¥78；.cn ¥29/¥38；.net ¥89/¥98；.top ¥13/¥31；.cc ¥28/¥68；.club ¥13/¥122；.cloud ¥14/¥162；.store ¥13/¥138；双 11 特价 .com ¥39、.cn ¥15",
+    basis:"共识区间 8.0–8.7；价目表逐后缀公开、批量与转入便宜",
+    note:"24 年老牌，域名保有量超 1000 万，官方价目表逐后缀公布新注 / 续费 / 转入价并支持批量，抢注与建站配套齐全；短板是部分新后缀续费涨幅大（.tech ¥14→¥240），界面偏传统。"
+  },
+  {
+    name:"中资源", dev:"厦门中资源网络服务有限公司", cat:"legacy",
+    score:7.8, avail:"free",
+    site:{label:"zzy.cn", url:"https://www.zzy.cn/"},
+    free:"域名批量优惠包与转入优惠（活动）；无长期免费注册额度",
+    price:".com 新注 ¥75、续费 ¥88、转入 ¥78；.cn ¥29/¥45/¥35；.net ¥80/¥95；.top ¥26（活动 ¥12）；赎回统一 ¥1200；10 月活动 .com 批量低至 ¥51、.cn 首年低至 ¥19",
+    basis:"共识区间 7.4–8.2；老牌渠道商、报价与赎回价透明",
+    note:"二十余年历史的老牌注册商，中英文域名价目齐全并公开赎回价，批量优惠包与转入活动频繁；短板是品牌与产品迭代慢，云与解析生态较弱。"
+  },
+  {
+    name:"时代互联", dev:"广东时代互联科技有限公司", cat:"legacy",
+    score:7.6, avail:"paid",
+    site:{label:"now.cn", url:"https://www.now.cn/"},
+    free:"待确认（官网未公示统一免费额度）",
+    price:".top ¥31、.vip ¥30.5、.tech ¥13、.ren ¥39 注册 / ¥69 续费（2026-10-07 比价口径）",
+    basis:"共识区间 7.1–8.0；后缀覆盖广、活动频次高",
+    note:"老牌域名与主机服务商，中英文后缀与虚拟主机、建站捆绑销售，促销活动频繁；短板是价格口径不统一、免费额度与隐私政策公示不足。"
+  },
+  {
+    name:"美橙互联", dev:"上海美橙科技信息发展有限公司", cat:"legacy",
+    score:7.7, avail:"free",
+    site:{label:"cndns.com", url:"https://www.cndns.com/"},
+    free:"新用户域名 0 元注册（活动，限新客）；CNNIC 与 ICANN 双认证资质",
+    price:".ren ¥38 注册 / ¥68 续费（2026-10-07 比价口径）；.com 与 .cn 活动价以官网为准",
+    basis:"共识区间 7.2–8.1；新客活动力度大、资质齐全",
+    note:"以主机＋域名＋建站打包的老牌服务商，新用户低价注册与「橙米」一口价交易并行，适合小微企业一站建站；短板是日常价与续费价偏高，价目公示零散。"
+  },
+  {
+    name:"商务中国（商中在线）", dev:"商中在线科技股份有限公司", cat:"legacy",
+    score:7.5, avail:"paid",
+    site:{label:"bizcn.com", url:"https://www.bizcn.com/"},
+    free:"待确认（官网未公示统一免费额度）",
+    price:".ren ¥35；.cn 转入 ¥30；.com 价格待确认（2026-10-07 比价口径）",
+    basis:"共识区间 7.0–7.9；渠道代理体系大、境内资质老",
+    note:"老牌域名注册与代理服务机构，向下游代理商与渠道供货，境内资质与年限达标；短板是面向终端用户的产品与价格透明度低，官网信息更新慢。"
+  },
+  {
+    name:"新网互联（dns.com.cn）", dev:"属商中在线体系的域名与 DNS 服务商（与新网数码非同一主体）", cat:"legacy",
+    score:7.2, avail:"paid",
+    site:{label:"dns.com.cn", url:"https://www.dns.com.cn/"},
+    free:"待确认（官网未公示统一免费额度）",
+    price:".cn 注册 ¥30、转入 ¥30；.ren ¥35（2026-10-07 比价口径）；.com 价格待确认",
+    basis:"共识区间 6.6–7.7；老牌域名与解析服务、价格接近渠道价",
+    note:"国内老牌域名与 DNS 服务商，与新网数码并非同一主体，价格接近渠道批发价；短板是云生态与自动化能力弱，官方价目与免费政策公示不完整。"
+  },
+  {
+    name:"纳网科技", dev:"厦门纳网科技股份有限公司", cat:"legacy",
+    score:7.4, avail:"paid",
+    site:{label:"na.wang", url:"https://www.na.wang/"},
+    free:"待确认（官网未公示免费额度）",
+    price:"待确认（官网未公示统一价目表）",
+    basis:"共识区间 6.9–7.9；CNNIC 与 ICANN 双认证老牌、规范经营",
+    note:"老牌双认证注册服务机构，域名与知识产权服务并行，长期出现在国内注册量前列榜单；短板是价格与免费政策公示不足，公开比价与媒体露出少。"
+  },
+  {
+    name:"华夏名网", dev:"成都华夏名网信息技术有限公司", cat:"legacy",
+    score:7.5, avail:"free",
+    site:{label:"sudu.cn", url:"https://www.sudu.cn/"},
+    free:"免费域名注册信息保护（官方口径）；免费基础解析",
+    price:".com 注册 ¥59.9（2026-10-07 全网最低档）、.xyz ¥12.9、.top ¥12.9",
+    basis:"共识区间 7.0–8.0；注册信息保护免费、价格低",
+    note:"ICANN 与 CNNIC 双认证，标称 50 万＋域名、上百个后缀，提供免费注册信息保护与域名交易平台；短板是品牌规模较小，企业级服务与 SLA 能力弱。"
+  },
+  {
+    name:"易名中国 ENAME", dev:"厦门易名科技股份有限公司", cat:"market",
+    score:8.1, avail:"free",
+    site:{label:"ename.com", url:"https://www.ename.com/"},
+    free:"转出与转入通道免费（官方口径）；无免费注册额度",
+    price:".net ¥30/年、.top ¥28/年、.ren ¥35/年（注册价，2026-10-07 比价口径）",
+    basis:"共识区间 7.7–8.5；老牌域名交易平台、报价有竞争力",
+    note:"域名交易与投资领域的老牌平台，一口价、竞价、转入转出与批量工具齐备，.net / .top 报价有优势；短板是产品面向投资者，面向企业建站与合规的服务薄弱。"
+  },
+  {
+    name:"聚名网", dev:"合肥聚名网络科技有限公司", cat:"market",
+    score:7.9, avail:"free",
+    site:{label:"juming.com", url:"https://www.juming.com/"},
+    free:"域名转出、过户免费（官方口径）；抢注与竞价需预存资金",
+    price:".com ¥81/首年（原价 ¥98/年）、.cn ¥39/首年、.net ¥95/首年、.top ¥20/首年、.cloud ¥20/首年、.xyz ¥32/首年",
+    basis:"共识区间 7.5–8.3；注册＋抢注＋竞价一体、首年价透明",
+    note:"ICANN 认证，把注册、抢注、竞价与一口价交易做成一体，首年促销价与「原价」并列公示，适合批量与投资；短板是续费价普遍高于首年，企业备案与合规服务较薄。"
+  },
+  {
+    name:"爱名网 22.cn", dev:"浙江贰贰网络有限公司", cat:"market",
+    score:8.0, avail:"free",
+    site:{label:"22.cn", url:"https://www.22.cn/"},
+    free:"免费域名隐私保护（部分后缀，官方口径）；免费转入通道",
+    price:".cn 注册 ¥25（2026-10-07 全网最低档）、.club ¥15",
+    basis:"共识区间 7.6–8.4；.cn 与 .club 处于最低报价档",
+    note:"老牌域名交易与注册平台，一口价、竞价与转入转出工具齐备，.cn 报价处于全网最低档；短板是主站面向域名投资人，企业建站与云服务配套少。"
+  },
+  {
+    name:"三五互联 35.com", dev:"厦门三五互联科技股份有限公司", cat:"flat",
+    score:7.3, avail:"free",
+    site:{label:"35.com", url:"https://www.35.com/"},
+    free:".CN 域名首年 0 元（完成 ICP 备案即可享，CNNIC 联合行动）；首页 1 元注册 .com/.cn 活动；.CN 新注满 3 年赠 1 年",
+    price:".com ¥77 注册 / ¥115 续费 / ¥78 转入；.cn ¥35/¥85/¥32；.top ¥18/¥88；.xyz ¥18/¥130；首页活动 .cn 首年 ¥9、.com 首年 ¥35",
+    basis:"共识区间 6.8–7.8；备案送 .CN 域名、续费价偏高",
+    note:"29 年老牌、ICANN 与 CNNIC 双认证，企业邮箱与智能建站打包销售，.CN 备案活动力度大；短板是续费价明显高于首年（.cn ¥35→¥85），个人与小客户体验一般。"
+  }
+];
+
+const PRICE_POINTS = [
+  {name:'美橙互联', x:0, y:7.7, free:true, lp:'right'},
+  {name:'三五互联', x:9, y:7.3, free:true, lp:'bottom'},
+  {name:'腾讯云', x:10, y:8.9, free:true, lp:'top'},
+  {name:'西部数码', x:10, y:8.4, free:true, lp:'bottom'},
+  {name:'阿里云万网', x:12, y:9.0, free:true, lp:'right'},
+  {name:'新网', x:12, y:8.2, free:true, lp:'top'},
+  {name:'中资源', x:12, y:7.8, free:true, lp:'left'},
+  {name:'时代互联', x:13, y:7.6, free:false, lp:'right'},
+  {name:'华夏名网', x:13, y:7.5, free:true, lp:'left'},
+  {name:'爱名网', x:15, y:8.0, free:true, lp:'top'},
+  {name:'聚名网', x:20, y:7.9, free:true, lp:'right'},
+  {name:'百度智能云', x:28, y:7.9, free:false, lp:'left'},
+  {name:'易名中国', x:28, y:8.1, free:true, lp:'right'},
+  {name:'新网互联', x:30, y:7.2, free:false, lp:'right'},
+  {name:'商务中国', x:35, y:7.5, free:false, lp:'left'}
+];
+
+const TIMELINE = [
+  {when:'2024.07', what:'Google Domains 客户迁移至 Squarespace 完成', why:'谷歌 2023 年宣布将域名业务出售给 Squarespace，2024 年 7 月完成迁移，海外注册市场收敛为 GoDaddy、Namecheap、Cloudflare 与 Squarespace 主导的格局；国内用户可选的「海外站」随之减少，跨境建站更依赖 Cloudflare / Namecheap 一类服务商。', hot:false},
+  {when:'2026.01', what:'ICANN 推进新一轮通用顶级域（new gTLD）计划', why:'ICANN 已批准启动新一轮新 gTLD 相关工作，后缀供给将再次扩容。对新后缀需要更谨慎：注册局成本波动会直接传导到续费价，本轮已出现 .studio、.gold 等后缀在 2026 年被单边上调的情况。', hot:false},
+  {when:'2026.05', what:'.ai 域名价格站上主流后缀高位', why:'AI 热潮把 .ai（安圭拉国家顶级域）推成稀缺资源，第三方比价显示 2026-10-07 的 .ai 注册价最低档为 Spaceship ¥461.48、Namecheap ¥502.84、Porkbun ¥554.47，续费同档位，远高于 .com / .cn；做 AI 品牌需按多年持有成本而非首年价预算。', hot:true},
+  {when:'2026.07', what:'三五互联公告调整「存在 ICP 备案域名」的转出资料', why:'国内注册商把 ICP 备案状态与域名转出所需材料绑定，说明备案联动已经进入转出流程：域名在境内做站，转出前需先处理备案与实名材料，跨注册商迁移的时间成本会明显上升。', hot:false},
+  {when:'2026.08', what:'腾讯云对 70 余个后缀同步调价', why:'因上游注册局成本变动，腾讯云自 2026-08-25 起调整 .site、.online、.xyz、.info、.tv 等 70 余个后缀的新注、续费与转入价（如 .online 续费 ¥91→¥122、.xyz 续费 ¥88→¥106），并明确「转入价与续费价保持一致」。', hot:true},
+  {when:'2026.09', what:'阿里云公告域名调价（.studio / .gold）', why:'阿里云自 2026-10-07 零时起把 .studio 调至 ¥328/年、.gold 调至 ¥698/年，理由是上游注册局成本上调；同时提示「优惠口令、批量优惠包、周三转入日」等促销仍在进行，说明调价与促销会长期并行。', hot:false},
+  {when:'2026.10', what:'万网开启域名直降季', why:'2026-10-01 至 10-31，万网把 .com 拉到 ¥76 起、.net ¥85 起、.top ¥12 起，并叠加「新客低至 0 元」「1 元域名」入口——上游涨价与平台补贴同时发生，正是判断真实持有成本最需要耐心的时刻。', hot:true}
+];
+
+const VERIFIED = [
+  {name:'万网（hichina.com）', verdict:'<span class="tag">有产品，品牌与阿里云同源</span>', note:'万网是阿里云旗下品牌，独立站点 hichina.com 仍在营（.com 首年 ¥63 起、.cn ¥29 起、.net ¥75 起，标称 4000 万＋域名在万网注册），与 wanwang.aliyun.com 为同一主体的两个入口，并非两家注册商。信源：<a class="ext" href="https://www.hichina.com/">万网官网</a>、<a class="ext" href="https://wanwang.aliyun.com/">阿里云万网</a>。'},
+  {name:'新网互联 vs 新网数码', verdict:'<span class="tag">名称易混淆，主体不同</span>', note:'「新网互联」（dns.com.cn）与「新网数码」（xinnet.com）不是同一家公司：前者属商中在线体系、以域名与 DNS 服务为主，后者是老牌注册商。比价与维权前应核对 WHOIS 中的 Registrar 名称与 ICANN 认证名录，不要只看中文品牌名。信源：<a class="ext" href="https://www.dns.com.cn/">新网互联官网</a>、<a class="ext" href="https://www.xinnet.com/">新网数码官网</a>。'},
+  {name:'假借域名注册 / 续费名义的仿冒与诈骗站点', verdict:'<span class="tag">仿冒站，排除</span>', note:'中央网信办举报中心持续通报仿冒假冒网站治理，其中包含假借「域名到期」「域名续费」「中文域名保护」名义诱导付款的站点；境外也有以域名续费施压的 domain slamming 类骗局（假借亚洲域名注册机构名义）。核验方法：只认注册商官网域名与 ICANN 认证名录，收到域名到期通知一律回到注册商后台自查。信源：<a class="ext" href="https://www.cac.gov.cn/">中央网信办</a>、<a class="ext" href="https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars">ICANN 认证注册商名录</a>。'},
+  {name:'已终止 / 取消授权的注册商名下域名', verdict:'<span class="tag">已停服（行业机制）</span>', note:'ICANN 对终止或取消授权（de-accredited）的注册商，会安排其名下域名批量转移至指定注册商，用户无需自行抢注。遇到注册商失联、网站无法续费时，应先查该注册商是否仍在授权名录内，再依机制处理。信源：<a class="ext" href="https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars">ICANN 认证注册商名录与批量转移说明</a>。'},
+  {name:'Freenom（.tk / .ml / .ga / .cf / .gq）', verdict:'<span class="tag">已停服</span>', note:'曾提供免费 .tk 等后缀的 Freenom 长期停止新注册与解析，官网仅保留公告页，实际已无法正常注册与续费，本轮列入排除清单。若域名仍在 Freenom 名下，应尽快按注册局与 ICANN 机制转移。信源：<a class="ext" href="https://www.freenom.com/">Freenom 官网公告页</a>。'},
+  {name:'Verisign', verdict:'<span class="tag">非此类产品</span>', note:'Verisign 是 .com / .net 的注册局（registry），只向 ICANN 认证注册商批发，不直接向终端用户零售域名；其官方批发价目表是判断「某家续费是否偏高」的基准。信源：<a class="ext" href="https://www.verisign.com/en_US/channel-resources/registry-operations/price-list/index.xhtml">Verisign 注册局价格表</a>。'},
+  {name:'CNNIC', verdict:'<span class="tag">非此类产品</span>', note:'中国互联网络信息中心是 .cn / .中国 的注册管理机构（registry）与国家顶级域管理机构，不直接向终端用户零售域名；零售须通过其认证的注册服务机构完成，实名与备案要求由主管部门与 CNNIC 规则共同决定。信源：<a class="ext" href="https://www.cnnic.cn/">CNNIC 官网</a>、<a class="ext" href="https://www.miit.gov.cn/">工业和信息化部</a>。'},
+  {name:'IANA 根区数据库', verdict:'<span class="tag">非注册商，核验工具</span>', note:'用于核验后缀是否真实存在及其所属注册局（如 .ai 归安圭拉、.io 归英属印度洋领地）。挑选新后缀前先查根区数据库，可避免买到炒作中的「伪后缀」或代理编造的品类。信源：<a class="ext" href="https://www.iana.org/domains/root/db">IANA Root Zone Database</a>。'}
+];
+
+const SOURCES = [
+  {p:"阿里云万网 域名注册", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://wanwang.aliyun.com/\">阿里云万网域名首页</a>","官方入口、后缀与服务范围、活动价（.com ¥76 起）"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.hichina.com/\">万网 hichina.com</a>","双入口关系、.com 首年 ¥63 起、.cn ¥29 起、4000 万＋注册量"],
+    ["官方公告","<a class=\"ext\" href=\"https://www.aliyun.com/notice/detail?notice-id=118698\">阿里云 2026-10-07 域名调价公告</a>","调价时点与幅度（.studio ¥328/年、.gold ¥698/年）"]
+  ]},
+  {p:"腾讯云 DNSPod 域名注册", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://cloud.tencent.com/product/domain\">腾讯云域名注册产品页</a>","官方入口、产品能力"],
+    ["官方价格表","<a class=\"ext\" href=\"https://buy.cloud.tencent.com/m/buy/domain/price\">腾讯云域名价格（注册 / 续费 / 转入 / 赎回）</a>","价格（.com ¥83 首年、第 2 年起 ¥90；.cn ¥33/¥39；.top ¥14/¥48）"],
+    ["官方公告","<a class=\"ext\" href=\"https://cloud.tencent.com/announce/detail/2430\">腾讯云 2026 域名价格调整公告（2026-08-25）</a>","70 余后缀调价明细（.online 续费 ¥91→¥122、.xyz ¥88→¥106 等）"]
+  ]},
+  {p:"华为云 域名注册", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.huaweicloud.com/product/domain.html\">华为云域名注册产品页</a>","官方入口、能力范围（解析 / 备案 / 邮箱联动）"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.huaweicloud.com/\">华为云官网</a>","云生态与合规资质"]
+  ]},
+  {p:"百度智能云 域名服务", items:[
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","注册 / 续费 / 转入价（.cn ¥28、.ren ¥45/¥48、.store ¥130）"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/ren/\">domain265：.ren 多注册商报价</a>","百度智能云 .ren ¥45/¥48/¥45 对照"]
+  ]},
+  {p:"新网 Xinnet", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.xinnet.com/\">新网数码官网</a>","官方入口、域名安全服务与资质"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格（.cn ¥29、.top ¥31、.cloud ¥12、.store ¥12）"]
+  ]},
+  {p:"西部数码", items:[
+    ["官方价格表","<a class=\"ext\" href=\"https://www.west.cn/web/price/domainpricelist\">西部数码域名注册 / 续费价格查询</a>","价格（.com 新注 ¥79 续费 ¥89 转入 ¥78；.cn ¥29/¥38；.tech ¥14/¥240）"],
+    ["官方站点","<a class=\"ext\" href=\"https://m.west.cn/\">西部数码移动站</a>","保有量（超 1000 万域名）、双 11 活动（.com ¥39、.cn ¥15）、公告"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.west.cn/\">西部数码官网</a>","企业与资质背景"]
+  ]},
+  {p:"中资源", items:[
+    ["官方价格表","<a class=\"ext\" href=\"https://www.zzy.cn/domain/domain-price.html\">中资源域名注册价格（新注 / 续费 / 转入 / 赎回）</a>","价格（.com ¥75/¥88/¥78、.cn ¥29/¥45/¥35、赎回 ¥1200）"],
+    ["官方活动页","<a class=\"ext\" href=\"https://www.zzy.cn/domain/domain-promotion.html\">中资源域名特惠与批量优惠包</a>","活动价（.com 批量低至 ¥51、.cn 首年低至 ¥19、转入优惠）"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.zzy.cn/\">中资源官网</a>","官方入口与资质"]
+  ]},
+  {p:"时代互联", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.now.cn/\">时代互联官网</a>","官方入口、域名与主机产品线"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格（.top ¥31、.vip ¥30.5、.tech ¥13、.ren ¥39/¥69）"]
+  ]},
+  {p:"美橙互联", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.cndns.com/\">美橙互联官网</a>","官方入口、新客 0 元注册活动、双认证资质"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/ren/\">domain265：.ren 多注册商报价</a>","价格（.ren ¥38/¥68/¥68）"]
+  ]},
+  {p:"商务中国（商中在线）", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.bizcn.com/\">商务中国官网</a>","官方入口、代理与渠道体系"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/ren/\">domain265：.ren 多注册商报价</a>","价格（.ren ¥35、.cn 转入 ¥30）"]
+  ]},
+  {p:"纳网科技", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.na.wang/\">纳网科技官网</a>","官方入口、双认证资质与产品线"],
+    ["行业参考","<a class=\"ext\" href=\"https://www.cnnic.cn/\">CNNIC：国内域名注册服务机构信息</a>","机构资质与在营状态核验路径"]
+  ]},
+  {p:"华夏名网", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.sudu.cn/\">华夏名网官网</a>","官方入口、免费注册信息保护、域名交易平台"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格（.com ¥59.9、.xyz ¥12.9、.top ¥12.9）"]
+  ]},
+  {p:"易名中国 ENAME", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.ename.com/\">易名中国官网</a>","官方入口、交易与转入转出工具"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格（.net ¥30、.top ¥28）"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/ren/\">domain265：.ren 多注册商报价</a>","价格（.ren ¥35）"]
+  ]},
+  {p:"聚名网", items:[
+    ["官方价格页","<a class=\"ext\" href=\"https://www.juming.com/reg/\">聚名网域名注册价格页</a>","价格（.com ¥81/首年、.cn ¥39、.net ¥95、.top ¥20、.cloud ¥20）"],
+    ["官方站点","<a class=\"ext\" href=\"https://m.juming.com/zx/cs\">聚名注册 / 交易 / 抢注产品服务页</a>","后缀列表与首年价、抢注与竞价服务"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.juming.com/\">聚名网官网</a>","官方入口与资质"]
+  ]},
+  {p:"爱名网 22.cn", items:[
+    ["官方站点","<a class=\"ext\" href=\"https://www.22.cn/\">爱名网官网</a>","官方入口、域名隐私保护与交易产品"],
+    ["第三方比价","<a class=\"ext\" href=\"https://www.domain265.com/\">domain265 域名价格查询（2026-10-07 更新）</a>","价格（.cn ¥25、.club ¥15）"]
+  ]},
+  {p:"三五互联 35.com", items:[
+    ["官方价格表","<a class=\"ext\" href=\"https://www.35.com/m/price/domainpricelist.asp\">三五互联域名价格查询</a>","价格（.com ¥77/¥115/¥78；.cn ¥35/¥85/¥32；.top ¥18/¥88）"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.35.com/index.asp\">三五互联官网</a>","官方入口、29 年经验与双认证、.CN 首年 0 元活动、1 元注册活动、备案域名转出公告"],
+    ["官方站点","<a class=\"ext\" href=\"https://www.35.com/\">三五互联域名频道</a>","后缀与产品线"]
+  ]},
+  {p:"通用核验与规则来源", items:[
+    ["注册局","<a class=\"ext\" href=\"https://www.verisign.com/en_US/channel-resources/registry-operations/price-list/index.xhtml\">Verisign 注册局价格表（.com / .net 批发价）</a>","判断续费溢价的基准"],
+    ["管理机构","<a class=\"ext\" href=\"https://www.icann.org/en/contracted-parties/accredited-registrars/list-of-accredited-registrars\">ICANN 认证注册商名录</a>","注册商资质核验、批量转移机制"],
+    ["管理机构","<a class=\"ext\" href=\"https://www.cnnic.cn/\">CNNIC 中国互联网络信息中心</a>",".cn / .中国 规则与实名要求"],
+    ["管理机构","<a class=\"ext\" href=\"https://www.miit.gov.cn/\">工业和信息化部</a>","域名管理与 ICP 备案政策"],
+    ["核验工具","<a class=\"ext\" href=\"https://www.iana.org/domains/root/db\">IANA Root Zone Database</a>","后缀真实性与所属注册局"]
+  ]}
+];
+
+const TODOS = [
+  ["华为云域名价格","官网未公示统一后缀价目表，无法与其他注册商逐项比价，需以购买页结算价为准。"],
+  ["纳网科技价格与免费额度","官网未见公开价目表与免费政策，价格、续费与 whois 隐私口径待官方确认。"],
+  ["阿里云 .com 注册 / 续费口径","活动页（首年 ¥35–76）与价格总览口径不一致，日常价与续费价未在公开页统一，本报告不采用单一数值。"],
+  ["腾讯云 .com「2 年起售」实际年费","活动商品列表出现「90 元/2 年起」表述，与官方价格表「¥83 首年、第 2 年起 ¥90/年」口径不同，需以结算页确认。"],
+  ["国内 whois 隐私保护口径",".com 等 gTLD 按 ICANN 政策对个人数据做编辑 / 隐藏；.cn / .中国 的隐私保护是否免费、覆盖范围如何，各注册商公示不一致，待 CNNIC 与注册商官方确认。"],
+  ["域名转出限制（60 天锁 + 备案联动）","ICANN 规则下的 60 天转移锁与国内 ICP 备案状态共同影响转出；三五互联已公告调整备案域名转出资料，其他注册商细则未完整公示，待逐一确认。"],
+  ["赎回价与宽限期","中资源公示统一赎回价 ¥1200；其余注册商的赎回价、宽限期与删除时点未在官网公示，待确认。"],
+  [".ai / .io / .dev 国内报价","国内注册商多以国际站、转入或代理方式提供这些后缀，人民币价目未完整公示，本报告仅采用第三方比价口径，待官方确认。"],
+  ["注册商 API 能力","除阿里云、腾讯云、华为云有公开 OpenAPI 文档外，老牌注册商的 API 开放范围、限流与计费未公示，待确认。"],
+  ["三五互联「1 元注册 .com/.cn」活动范围","活动页未说明限购数量、适用资格与活动截止时间，待官方确认。"]
+];
+
+/* ================= 渲染：总表 ================= */
+const CAT = {cloud:'云厂商', legacy:'老牌注册商', market:'域名交易平台', flat:'平价与批量型'};
+const CAT_TAG = {cloud:'cat-video', legacy:'cat-live', market:'cat-clone', flat:'cat-interactive'};
+const tableEl = document.getElementById('mainTable');
+PRODUCTS.forEach(function(p){
+  const availTag = p.avail === 'free'
+    ? '<span class="tag free">有免费额度</span>'
+    : '<span class="tag paid">无公开免费额度</span>';
+  const catTag = '<span class="tag ' + CAT_TAG[p.cat] + '">' + CAT[p.cat] + '</span>';
+  const scoreHtml = (p.score === null)
+    ? '<span class="score na">—</span>'
+    : '<span class="score">' + p.score.toFixed(1) + '</span>';
+  const priceHtml = p.price + (p.cny ? '<span class="note-inline" style="display:block;margin-top:3px">' + p.cny + '</span>' : '');
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td data-label="服务商 / 运营方"><span class="pname">' + p.name + '</span><span class="dev">' + p.dev + '</span><span style="display:block;margin-top:6px">' + catTag + availTag + '</span></td>' +
+    '<td data-label="评分">' + scoreHtml + '</td>' +
+    '<td data-label="评分依据"><span class="basis">' + p.basis + '</span></td>' +
+    '<td data-label="官方入口"><a class="ext" href="' + p.site.url + '">' + p.site.label + '</a></td>' +
+    '<td data-label="免费额度">' + p.free + '</td>' +
+    '<td data-label="价格">' + priceHtml + '</td>' +
+    '<td data-label="特点与局限">' + p.note + '</td>';
+  tableEl.appendChild(tr);
+});
+document.getElementById('tableCaption').textContent =
+  '注：评分为主观共识评分（满分 10），非厂商官方指标。价格与免费额度均以 2026-10-08 公开信息为准；标注「待确认」表示本轮未取得可靠官方口径。价格列格式为「新注 / 续费 / 转入」。';
+
+/* ================= 渲染：时间线 ================= */
+const tlEl = document.getElementById('timeline');
+TIMELINE.forEach(function(t){
+  var d = document.createElement('div');
+  d.className = 'tnode' + (t.hot ? ' hot' : '');
+  d.innerHTML = '<div class="when">' + t.when + '</div><div class="axis"><i class="dot"></i></div>' +
+                '<div class="body"><p class="what">' + t.what + '</p><p class="why">' + t.why + '</p></div>';
+  tlEl.appendChild(d);
+});
+
+/* ================= 渲染：核验表 ================= */
+const vEl = document.getElementById('verifyTable');
+VERIFIED.forEach(function(v){
+  var tr = document.createElement('tr');
+  tr.innerHTML = '<td data-label="厂商 / 产品"><span class="pname">' + v.name + '</span></td>' +
+                 '<td data-label="核验结论">' + v.verdict + '</td>' +
+                 '<td data-label="说明">' + v.note + '</td>';
+  vEl.appendChild(tr);
+});
+
+/* ================= 渲染：信源索引 ================= */
+const srcEl = document.getElementById('sourceIndex');
+SOURCES.forEach(function(g){
+  var h = document.createElement('div');
+  h.className = 'srcgrp';
+  var rows = g.items.map(function(it){
+    var link = /^https?:/.test(it[1]) ? '<a class="ext" href="' + it[1] + '">' + it[1] + '</a>' : it[1];
+    link = link.replace(/・/g, '<br>');
+    return '<li class="srcitem">' +
+           '<span class="srclabel">' + it[0] + '</span>' +
+           '<span class="srcbody">' + link +
+           '<span class="srcfield">支撑字段：' + it[2] + '</span></span></li>';
+  }).join('');
+  h.innerHTML = '<h3>' + g.p + '</h3><ul class="srclist">' + rows + '</ul>';
+  srcEl.appendChild(h);
+});
+
+/* ================= 渲染：待确认 ================= */
+const todoEl = document.getElementById('todoList');
+TODOS.forEach(function(t, i){
+  var d = document.createElement('div');
+  d.className = 't';
+  d.innerHTML = '<div class="n">' + (i + 1) + '</div><div class="c"><b>' + t[0] + '：</b>' + t[1] + '</div>';
+  todoEl.appendChild(d);
+});
+
+/* ================= ECharts ================= */
+var C = {primary:'#12564C', accent:'#C4762A', ink:'#1F2329', ink2:'#646A73', ink3:'#8A939B', line:'#DEE3E8'};
+var CAT_COLOR = {cloud:'#12564C', legacy:'#C4762A', market:'#4E7BA6', flat:'#7C8A5A'};
+var FONT = '"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif';
+
+function renderScore(){
+  var el = document.getElementById('chartScore');
+  if(!el || typeof echarts === 'undefined') return;
+  var data = PRODUCTS.filter(function(p){return p.score !== null;})
+                     .slice().sort(function(a,b){return a.score - b.score;});
+  var chart = echarts.init(el);
+  chart.setOption({
+    grid:{left:8, right:72, top:18, bottom:34, containLabel:true},
+    tooltip:{
+      trigger:'axis', axisPointer:{type:'shadow'},
+      backgroundColor:'#fff', borderColor:C.line, borderWidth:1,
+      textStyle:{color:C.ink, fontFamily:FONT, fontSize:14},
+      formatter:function(ps){
+        var i = ps[0].dataIndex, p = data[i];
+        return '<b>' + p.name + '</b><br/>综合评分：' + p.score.toFixed(1) + ' / 10<br/>类型：' + CAT[p.cat] +
+               '<br/>运营方：' + p.dev + '<br/>评分依据：' + p.basis;
+      }
+    },
+    xAxis:{
+      type:'value', min:0, max:10, splitNumber:5,
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13}
+    },
+    yAxis:{
+      type:'category',
+      data:data.map(function(p){return p.name;}),
+      axisLine:{show:false}, axisTick:{show:false},
+      axisLabel:{color:C.ink, fontFamily:FONT, fontSize:13.5}
+    },
+    series:[{
+      type:'bar', barWidth:'58%',
+      data:data.map(function(p){
+        return {
+          value:p.score,
+          itemStyle:{color:CAT_COLOR[p.cat], borderRadius:[0,3,3,0]}
+        };
+      }),
+      label:{
+        show:true, position:'right', fontFamily:FONT, fontSize:13.5,
+        fontWeight:'bold', color:C.ink, formatter:function(ps){return ps.value.toFixed(1);}
+      }
+    }]
+  });
+  window.addEventListener('resize', function(){chart.resize();});
+}
+
+function renderPrice(){
+  var el = document.getElementById('chartPrice');
+  if(!el || typeof echarts === 'undefined' || !PRICE_POINTS.length) return;
+  var chart = echarts.init(el);
+  chart.setOption({
+    grid:{left:8, right:40, top:26, bottom:56, containLabel:true},
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'#fff', borderColor:C.line, borderWidth:1,
+      textStyle:{color:C.ink, fontFamily:FONT, fontSize:14},
+      formatter:function(ps){
+        var d = ps.data, v = d.value;
+        return '<b>' + d.name + '</b><br/>最低付费年费：' + (v[0] === 0 ? '0（首年 0 元活动）' : '¥' + v[0] + '/年') +
+               '<br/>综合评分：' + v[1].toFixed(1);
+      }
+    },
+    xAxis:{
+      type:'value', min:-3, max:45,
+      axisLine:{lineStyle:{color:C.line}}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13, formatter:'{value}'},
+      name:'最低付费年费（元）', nameLocation:'middle', nameGap:34,
+      nameTextStyle:{color:C.ink2, fontFamily:FONT, fontSize:13}
+    },
+    yAxis:{
+      type:'value', min:6.8, max:9.4, splitNumber:5,
+      axisLine:{show:false}, axisTick:{show:false},
+      splitLine:{lineStyle:{color:'#EDF1F4'}},
+      axisLabel:{color:C.ink3, fontFamily:FONT, fontSize:13},
+      name:'综合评分', nameTextStyle:{color:C.ink2, fontFamily:FONT, fontSize:13}
+    },
+    series:[{
+      type:'scatter',
+      symbolSize:16,
+      data:PRICE_POINTS.map(function(p){
+        return {
+          name:p.name,
+          value:[p.x, p.y],
+          free:p.free,
+          label:{position:p.lp, distance:10}
+        };
+      }),
+      itemStyle:{
+        color:function(ps){return ps.data.free ? C.primary : C.accent;},
+        borderColor:'#fff', borderWidth:1.5
+      },
+      label:{
+        show:true, fontFamily:FONT, fontSize:12.5, color:C.ink,
+        formatter:function(ps){return ps.data.name;}
+      },
+      markLine:{
+        silent:true, symbol:'none',
+        lineStyle:{color:C.primary, type:'dashed', width:1, opacity:.55},
+        label:{show:true, position:'insideEndTop', fontFamily:FONT, fontSize:12, color:C.primary,
+               formatter:'首年 0 元区'},
+        data:[{xAxis:0}]
+      }
+    }]
+  });
+  window.addEventListener('resize', function(){chart.resize();});
+}
+
+renderScore();
+renderPrice();
+</script>
+
+</main>
+
+</body>
+</html>
